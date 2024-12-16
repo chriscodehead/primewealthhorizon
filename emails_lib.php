@@ -660,21 +660,6 @@ class email
 
         <p>We are thrilled to inform you that your registration for our Product Design Master Class has been successfully completed. You are now officially part of a vibrant community of passionate designers who are committed to pushing the boundaries of creativity and innovation.</p><br />
 
-        <p>By joining this master class, you have taken a significant step towards honing your product design skills, gaining valuable insights, and expanding your professional network. We are confident that this journey will be transformative, empowering you to unleash your full potential in the world of design.</p><br />
-
-        <p>Throughout the course, you will have access to industry experts, practical sessions, mentorship, and a supportive community of fellow learners. We encourage you to actively engage, share your ideas, and embrace the challenges that lie ahead. Together, we will explore new horizons, create impactful designs, and shape the future of product design.</p><br />
-
-        <p>Once again, congratulations on securing your spot in our Product Design Master Class. We look forward to embarking on this incredible learning journey with you!</p><br />
-        <p>Founder: <a href="https://www.linkedin.com/in/chriscodehead">Mr. Chris</a></p><br />
-        
-        <center><img width="100%" class="img-responsive" src="https://' . $this->siteDomain . '/img/product-design-roadmap.jpg" /></center><br />
-
-        <p>If you have any questions or need further assistance, please do not hesitate to reach out to our <a href="https://api.whatsapp.com/send?phone=' . $this->site_whatsapp_num . '&text=Hello, I want to enquire about ' . $this->siteName . '">support team</a>. Welcome aboard!</p><br /><br /><br />
-        
-        <center><a href="https://t.me/+YnLk2gIwxC1jMGJk"><button style="background-color: #007bff; padding: 15px; border: 0px; color: white; font-size: 15px;" class="btn btn-primary">Join The Telegram Community!</button></a></center>
-<br /><br />
-<center><a href="https://www.linkedin.com/company/centadesk-global-services/mycompany/"><button class="btn btn-primary btn-lg">Join Us On Linkedin!</button></a></center>
-<br /><br />
         <p>Best regards,
         ' . $this->siteName . ' Team<br /><br />
         Powered by: <a href="https://primewealthhorizon.com">CENTADESK GLOBAL SERVICES</a></p>';

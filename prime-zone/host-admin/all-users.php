@@ -77,23 +77,171 @@ $bassic->checkLogedINAdmin('login'); ?>
                                                             <td class="f-w-600"><?php print $row['email']; ?></td>
 
                                                             <td><?php if ($row['payment_activation_status'] == 'yes') {
-                                                                    print '<button class="btn btn-sm btn-warning text-dark">Paid</button>';
+                                                                    print '<button data-bs-toggle="modal"
+        data-bs-target="#modalPaid' . $row['user_code'] . '" class="btn btn-sm btn-warning text-dark">Paid</button>';
                                                                 } else {
-                                                                    print '<button class="btn btn-sm btn-primary text-dark">Pending</button>';
-                                                                } ?></td>
+                                                                    print '<button data-bs-toggle="modal"
+        data-bs-target="#modalunpaid' . $row['user_code'] . '" class="btn btn-sm btn-primary text-dark">Pending</button>';
+                                                                } ?>
+                                                            </td>
+
+                                                            <div class="modal fade theme-modal remove-coupon" id="modalPaid<?php print $row['user_code']; ?>" aria-hidden="true" tabindex="-1">
+                                                                <div class="modal-dialog modal-dialog-centered">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header d-block text-center">
+                                                                            <h5 class="modal-title w-100" id="exampleModalLabel22">Are You Sure ?</h5>
+                                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                                                                <i class="fas fa-times"></i>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <div class="remove-box">
+                                                                                <p>Please confirm if you want to disapprove this payment status and change it to pending payment.</p>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-animation btn-md fw-bold" data-bs-dismiss="modal">No</button>
+                                                                            <button type="button" class="btn btn-animation btn-md fw-bold " onclick="setPendingPayment('<?php print $row['user_code']; ?>')" data-bs-dismiss=" modal">Yes <i id="spin" class=""></i></button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="modal fade theme-modal remove-coupon" id="modalunpaid<?php print $row['user_code']; ?>" aria-hidden="true" tabindex="-1">
+                                                                <div class="modal-dialog modal-dialog-centered">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header d-block text-center">
+                                                                            <h5 class="modal-title w-100" id="exampleModalLabel22">Are You Sure ?</h5>
+                                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                                                                <i class="fas fa-times"></i>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <div class="remove-box">
+                                                                                <p>Please confirm if you want to approve this payment status and mark it as paid.</p>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-animation btn-md fw-bold" data-bs-dismiss="modal">No</button>
+                                                                            <button type="button" class="btn btn-animation btn-md fw-bold " onclick="setPaidPayment('<?php print $row['user_code']; ?>')" data-bs-dismiss=" modal">Yes <i id="spin" class=""></i></button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+
+
+
+
 
                                                             <td><?php if ($row['approved_for_affiliate'] == 'yes') {
-                                                                    print '<button class="btn btn-sm btn-warning text-dark">Approved</button>';
+                                                                    print '<button data-bs-toggle="modal"
+        data-bs-target="#modalApproveAfiliate' . $row['user_code'] . '" class="btn btn-sm btn-warning text-dark">Approved</button>';
                                                                 } else {
-                                                                    print '<button class="btn btn-sm btn-primary text-dark">Pending</button>';
-                                                                } ?></td>
+                                                                    print '<button data-bs-toggle="modal"
+        data-bs-target="#modalUnapproveAfiliate' . $row['user_code'] . '" class="btn btn-sm btn-primary text-dark">Pending</button>';
+                                                                } ?>
+                                                            </td>
 
+
+
+                                                            <div class="modal fade theme-modal remove-coupon" id="modalApproveAfiliate<?php print $row['user_code']; ?>" aria-hidden="true" tabindex="-1">
+                                                                <div class="modal-dialog modal-dialog-centered">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header d-block text-center">
+                                                                            <h5 class="modal-title w-100" id="exampleModalLabel22">Are You Sure ?</h5>
+                                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                                                                <i class="fas fa-times"></i>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <div class="remove-box">
+                                                                                <p>Please confirm if you want to disapprove this affilaie status and change it to pending approval.</p>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-animation btn-md fw-bold" data-bs-dismiss="modal">No</button>
+                                                                            <button type="button" class="btn btn-animation btn-md fw-bold " onclick="setPendingApproveAfiliate('<?php print $row['user_code']; ?>')" data-bs-dismiss=" modal">Yes <i id="spin" class=""></i></button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="modal fade theme-modal remove-coupon" id="modalUnapproveAfiliate<?php print $row['user_code']; ?>" aria-hidden="true" tabindex="-1">
+                                                                <div class="modal-dialog modal-dialog-centered">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header d-block text-center">
+                                                                            <h5 class="modal-title w-100" id="exampleModalLabel22">Are You Sure ?</h5>
+                                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                                                                <i class="fas fa-times"></i>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <div class="remove-box">
+                                                                                <p>Please confirm if you want to approve this affiliate status and mark it as approved.</p>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-animation btn-md fw-bold" data-bs-dismiss="modal">No</button>
+                                                                            <button type="button" class="btn btn-animation btn-md fw-bold " onclick="setApproveAfiliate('<?php print $row['user_code']; ?>')" data-bs-dismiss=" modal">Yes <i id="spin" class=""></i></button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
 
                                                             <td><?php if ($row['blocked_account'] == 0) {
-                                                                    print '<button class="btn btn-sm btn-warning text-dark">Active</button>';
+                                                                    print '<button data-bs-toggle="modal"
+data-bs-target="#modalBlockUser' . $row['user_code'] . '" class="btn btn-sm btn-warning text-dark">Active</button>';
                                                                 } else {
-                                                                    print '<button class="btn btn-sm btn-primary text-dark">Blocked</button>';
-                                                                } ?></td>
+                                                                    print '<button data-bs-toggle="modal"
+data-bs-target="#modalUnblockUser' . $row['user_code'] . '" class="btn btn-sm btn-primary text-dark">Blocked</button>';
+                                                                } ?>
+                                                            </td>
+
+
+                                                            <div class="modal fade theme-modal remove-coupon" id="modalBlockUser<?php print $row['user_code']; ?>" aria-hidden="true" tabindex="-1">
+                                                                <div class="modal-dialog modal-dialog-centered">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header d-block text-center">
+                                                                            <h5 class="modal-title w-100" id="exampleModalLabel22">Are You Sure ?</h5>
+                                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                                                                <i class="fas fa-times"></i>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <div class="remove-box">
+                                                                                <p>Please confirm if you want to unblock this users account.</p>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-animation btn-md fw-bold" data-bs-dismiss="modal">No</button>
+                                                                            <button type="button" class="btn btn-animation btn-md fw-bold " onclick="unblockUser('<?php print $row['user_code']; ?>')" data-bs-dismiss=" modal">Yes <i id="spin" class=""></i></button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="modal fade theme-modal remove-coupon" id="modalUnblockUser<?php print $row['user_code']; ?>" aria-hidden="true" tabindex="-1">
+                                                                <div class="modal-dialog modal-dialog-centered">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header d-block text-center">
+                                                                            <h5 class="modal-title w-100" id="exampleModalLabel22">Are You Sure ?</h5>
+                                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                                                                <i class="fas fa-times"></i>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <div class="remove-box">
+                                                                                <p>Please confirm if you want to block this users account.</p>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-animation btn-md fw-bold" data-bs-dismiss="modal">No</button>
+                                                                            <button type="button" class="btn btn-animation btn-md fw-bold " onclick="blockUser('<?php print $row['user_code']; ?>')" data-bs-dismiss=" modal">Yes <i id="spin" class=""></i></button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
 
                                                             <td>
                                                                 <ul>
@@ -115,6 +263,7 @@ $bassic->checkLogedINAdmin('login'); ?>
                                                                             <i class="ri-delete-bin-line"></i>
                                                                         </a>
                                                                     </li>
+
                                                                 </ul>
                                                             </td>
                                                         </tr>
@@ -239,6 +388,10 @@ $bassic->checkLogedINAdmin('login'); ?>
                         }
 
                     }
+
+                    //setPendingPayment setPaidPayment
+                    //setPendingApproveAfiliate setApproveAfiliate
+                    //unblockUser blockUser
                 </script>
 </body>
 

@@ -1012,7 +1012,7 @@ from this mailing list.
                     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
                     CURLOPT_CUSTOMREQUEST => 'GET',
                     CURLOPT_HTTPHEADER => array(
-                        'x-api-key: RQNBQVF-M9H4SP8-MCCFF1D-8GFSYVW'
+                        'x-api-key: '
                     ),
                 ));
 
