@@ -191,10 +191,10 @@ $bassic->checkLogedINAdmin('login'); ?>
 
                                                             <td><?php if ($row['blocked_account'] == 0) {
                                                                     print '<button data-bs-toggle="modal"
-data-bs-target="#modalBlockUser' . $row['user_code'] . '" class="btn btn-sm btn-warning text-dark">Active</button>';
+data-bs-target="#modalUnblockUser' . $row['user_code'] . '" class="btn btn-sm btn-warning text-dark">Active</button>';
                                                                 } else {
                                                                     print '<button data-bs-toggle="modal"
-data-bs-target="#modalUnblockUser' . $row['user_code'] . '" class="btn btn-sm btn-primary text-dark">Blocked</button>';
+data-bs-target="#modalBlockUser' . $row['user_code'] . '" class="btn btn-sm btn-primary text-dark">Blocked</button>';
                                                                 } ?>
                                                             </td>
 
@@ -245,11 +245,11 @@ data-bs-target="#modalUnblockUser' . $row['user_code'] . '" class="btn btn-sm bt
 
                                                             <td>
                                                                 <ul>
-                                                                    <li>
+                                                                    <!-- <li>
                                                                         <a href="user-details?userId=<?php print $row['user_code']; ?>">
                                                                             <i class="ri-eye-line"></i>
                                                                         </a>
-                                                                    </li>
+                                                                    </li> -->
 
                                                                     <li>
                                                                         <a href="edit-user?userId=<?php print $row['user_code']; ?>">
@@ -347,7 +347,7 @@ data-bs-target="#modalUnblockUser' . $row['user_code'] . '" class="btn btn-sm bt
 
                         if (UserId == "") {
 
-                            document.getElementById('defaultTitle').innerHTML = 'Invalid Product Id!!!';
+                            document.getElementById('defaultTitle').innerHTML = 'Invalid User Id!!!';
                             document.getElementById('defaultMessage').innerHTML = 'Unexpected error occoured. Refresh page and try again!';
                             const modal = new bootstrap.Modal(document.getElementById('defaultModal'));
                             modal.show();
@@ -389,9 +389,329 @@ data-bs-target="#modalUnblockUser' . $row['user_code'] . '" class="btn btn-sm bt
 
                     }
 
-                    //setPendingPayment setPaidPayment
-                    //setPendingApproveAfiliate setApproveAfiliate
-                    //unblockUser blockUser
+                    //setPendingPayment
+                    function setPendingPayment(UserId) {
+                        var hr = new XMLHttpRequest();
+                        var url = "ajax-call.php?action=setPendingPayment";
+                        var UserId = UserId;
+                        var vars = "UserId=" + UserId;
+                        $('i#spin').attr("class", "fa fa-spinner fa-spin");
+
+                        if (UserId == "") {
+
+                            document.getElementById('defaultTitle').innerHTML = 'Invalid User Id!!!';
+                            document.getElementById('defaultMessage').innerHTML = 'Unexpected error occoured. Refresh page and try again!';
+                            const modal = new bootstrap.Modal(document.getElementById('defaultModal'));
+                            modal.show();
+
+                        } else {
+
+                            hr.open("POST", url, true); // asynchronous request
+                            hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                            hr.onreadystatechange = function() {
+                                if (hr.readyState == 4) {
+                                    $(".se-pre-con2").css('display', 'none');
+                                    if (hr.status == 200) {
+                                        var return_data = JSON.parse(hr.responseText);
+                                        if (return_data.success) {
+                                            document.getElementById('defaultTitle').innerHTML = return_data.success;
+                                            document.getElementById('defaultMessage').innerHTML = return_data.msg;
+                                            const modal = new bootstrap.Modal(document.getElementById('defaultModal'));
+                                            modal.show();
+                                            setTimeout(function() {
+                                                location.reload();
+                                            }, 5000);
+
+                                        } else {
+                                            document.getElementById('defaultTitle').innerHTML = 'An error occured!';
+                                            document.getElementById('defaultMessage').innerHTML = return_data.msg;
+                                            const modal = new bootstrap.Modal(document.getElementById('defaultModal'));
+                                            modal.show();
+                                        }
+                                    } else {
+
+                                        document.getElementById('defaultTitle').innerHTML = 'An error occured!';
+                                        document.getElementById('defaultMessage').innerHTML = 'An unexpected error occurred. Please try again later.';
+                                        const modal = new bootstrap.Modal(document.getElementById('defaultModal'));
+                                        modal.show();
+                                    }
+                                }
+                            }
+                            hr.send(vars); // Actually execute the request
+
+                        }
+
+                    }
+
+                    //setPaidPayment
+                    function setPaidPayment(UserId) {
+                        var hr = new XMLHttpRequest();
+                        var url = "ajax-call.php?action=setPaidPayment";
+                        var UserId = UserId;
+                        var vars = "UserId=" + UserId;
+                        $('i#spin').attr("class", "fa fa-spinner fa-spin");
+
+                        if (UserId == "") {
+
+                            document.getElementById('defaultTitle').innerHTML = 'Invalid User Id!!!';
+                            document.getElementById('defaultMessage').innerHTML = 'Unexpected error occoured. Refresh page and try again!';
+                            const modal = new bootstrap.Modal(document.getElementById('defaultModal'));
+                            modal.show();
+
+                        } else {
+
+                            hr.open("POST", url, true); // asynchronous request
+                            hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                            hr.onreadystatechange = function() {
+                                if (hr.readyState == 4) {
+                                    $(".se-pre-con2").css('display', 'none');
+                                    if (hr.status == 200) {
+                                        var return_data = JSON.parse(hr.responseText);
+                                        if (return_data.success) {
+                                            document.getElementById('defaultTitle').innerHTML = return_data.success;
+                                            document.getElementById('defaultMessage').innerHTML = return_data.msg;
+                                            const modal = new bootstrap.Modal(document.getElementById('defaultModal'));
+                                            modal.show();
+                                            setTimeout(function() {
+                                                location.reload();
+                                            }, 5000);
+
+                                        } else {
+                                            document.getElementById('defaultTitle').innerHTML = 'An error occured!';
+                                            document.getElementById('defaultMessage').innerHTML = return_data.msg;
+                                            const modal = new bootstrap.Modal(document.getElementById('defaultModal'));
+                                            modal.show();
+                                        }
+                                    } else {
+
+                                        document.getElementById('defaultTitle').innerHTML = 'An error occured!';
+                                        document.getElementById('defaultMessage').innerHTML = 'An unexpected error occurred. Please try again later.';
+                                        const modal = new bootstrap.Modal(document.getElementById('defaultModal'));
+                                        modal.show();
+                                    }
+                                }
+                            }
+                            hr.send(vars); // Actually execute the request
+
+                        }
+
+                    }
+
+                    //setPendingApproveAfiliate
+                    function setPendingApproveAfiliate(UserId) {
+                        var hr = new XMLHttpRequest();
+                        var url = "ajax-call.php?action=setPendingApproveAfiliate";
+                        var UserId = UserId;
+                        var vars = "UserId=" + UserId;
+                        $('i#spin').attr("class", "fa fa-spinner fa-spin");
+
+                        if (UserId == "") {
+
+                            document.getElementById('defaultTitle').innerHTML = 'Invalid User Id!!!';
+                            document.getElementById('defaultMessage').innerHTML = 'Unexpected error occoured. Refresh page and try again!';
+                            const modal = new bootstrap.Modal(document.getElementById('defaultModal'));
+                            modal.show();
+
+                        } else {
+
+                            hr.open("POST", url, true); // asynchronous request
+                            hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                            hr.onreadystatechange = function() {
+                                if (hr.readyState == 4) {
+                                    $(".se-pre-con2").css('display', 'none');
+                                    if (hr.status == 200) {
+                                        var return_data = JSON.parse(hr.responseText);
+                                        if (return_data.success) {
+                                            document.getElementById('defaultTitle').innerHTML = return_data.success;
+                                            document.getElementById('defaultMessage').innerHTML = return_data.msg;
+                                            const modal = new bootstrap.Modal(document.getElementById('defaultModal'));
+                                            modal.show();
+                                            setTimeout(function() {
+                                                location.reload();
+                                            }, 5000);
+
+                                        } else {
+                                            document.getElementById('defaultTitle').innerHTML = 'An error occured!';
+                                            document.getElementById('defaultMessage').innerHTML = return_data.msg;
+                                            const modal = new bootstrap.Modal(document.getElementById('defaultModal'));
+                                            modal.show();
+                                        }
+                                    } else {
+
+                                        document.getElementById('defaultTitle').innerHTML = 'An error occured!';
+                                        document.getElementById('defaultMessage').innerHTML = 'An unexpected error occurred. Please try again later.';
+                                        const modal = new bootstrap.Modal(document.getElementById('defaultModal'));
+                                        modal.show();
+                                    }
+                                }
+                            }
+                            hr.send(vars); // Actually execute the request
+
+                        }
+
+                    }
+
+                    //setApproveAfiliate
+                    function setApproveAfiliate(UserId) {
+                        var hr = new XMLHttpRequest();
+                        var url = "ajax-call.php?action=setApproveAfiliate";
+                        var UserId = UserId;
+                        var vars = "UserId=" + UserId;
+                        $('i#spin').attr("class", "fa fa-spinner fa-spin");
+
+                        if (UserId == "") {
+
+                            document.getElementById('defaultTitle').innerHTML = 'Invalid User Id!!!';
+                            document.getElementById('defaultMessage').innerHTML = 'Unexpected error occoured. Refresh page and try again!';
+                            const modal = new bootstrap.Modal(document.getElementById('defaultModal'));
+                            modal.show();
+
+                        } else {
+
+                            hr.open("POST", url, true); // asynchronous request
+                            hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                            hr.onreadystatechange = function() {
+                                if (hr.readyState == 4) {
+                                    $(".se-pre-con2").css('display', 'none');
+                                    if (hr.status == 200) {
+                                        var return_data = JSON.parse(hr.responseText);
+                                        if (return_data.success) {
+                                            document.getElementById('defaultTitle').innerHTML = return_data.success;
+                                            document.getElementById('defaultMessage').innerHTML = return_data.msg;
+                                            const modal = new bootstrap.Modal(document.getElementById('defaultModal'));
+                                            modal.show();
+                                            setTimeout(function() {
+                                                location.reload();
+                                            }, 5000);
+
+                                        } else {
+                                            document.getElementById('defaultTitle').innerHTML = 'An error occured!';
+                                            document.getElementById('defaultMessage').innerHTML = return_data.msg;
+                                            const modal = new bootstrap.Modal(document.getElementById('defaultModal'));
+                                            modal.show();
+                                        }
+                                    } else {
+
+                                        document.getElementById('defaultTitle').innerHTML = 'An error occured!';
+                                        document.getElementById('defaultMessage').innerHTML = 'An unexpected error occurred. Please try again later.';
+                                        const modal = new bootstrap.Modal(document.getElementById('defaultModal'));
+                                        modal.show();
+                                    }
+                                }
+                            }
+                            hr.send(vars); // Actually execute the request
+
+                        }
+
+                    }
+
+                    //unblockUser
+                    function unblockUser(UserId) {
+                        var hr = new XMLHttpRequest();
+                        var url = "ajax-call.php?action=unblockUser";
+                        var UserId = UserId;
+                        var vars = "UserId=" + UserId;
+                        $('i#spin').attr("class", "fa fa-spinner fa-spin");
+
+                        if (UserId == "") {
+
+                            document.getElementById('defaultTitle').innerHTML = 'Invalid User Id!!!';
+                            document.getElementById('defaultMessage').innerHTML = 'Unexpected error occoured. Refresh page and try again!';
+                            const modal = new bootstrap.Modal(document.getElementById('defaultModal'));
+                            modal.show();
+
+                        } else {
+
+                            hr.open("POST", url, true); // asynchronous request
+                            hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                            hr.onreadystatechange = function() {
+                                if (hr.readyState == 4) {
+                                    $(".se-pre-con2").css('display', 'none');
+                                    if (hr.status == 200) {
+                                        var return_data = JSON.parse(hr.responseText);
+                                        if (return_data.success) {
+                                            document.getElementById('defaultTitle').innerHTML = return_data.success;
+                                            document.getElementById('defaultMessage').innerHTML = return_data.msg;
+                                            const modal = new bootstrap.Modal(document.getElementById('defaultModal'));
+                                            modal.show();
+                                            setTimeout(function() {
+                                                location.reload();
+                                            }, 5000);
+
+                                        } else {
+                                            document.getElementById('defaultTitle').innerHTML = 'An error occured!';
+                                            document.getElementById('defaultMessage').innerHTML = return_data.msg;
+                                            const modal = new bootstrap.Modal(document.getElementById('defaultModal'));
+                                            modal.show();
+                                        }
+                                    } else {
+
+                                        document.getElementById('defaultTitle').innerHTML = 'An error occured!';
+                                        document.getElementById('defaultMessage').innerHTML = 'An unexpected error occurred. Please try again later.';
+                                        const modal = new bootstrap.Modal(document.getElementById('defaultModal'));
+                                        modal.show();
+                                    }
+                                }
+                            }
+                            hr.send(vars); // Actually execute the request
+
+                        }
+
+                    }
+
+                    //blockUser
+                    function blockUser(UserId) {
+                        var hr = new XMLHttpRequest();
+                        var url = "ajax-call.php?action=blockUser";
+                        var UserId = UserId;
+                        var vars = "UserId=" + UserId;
+                        $('i#spin').attr("class", "fa fa-spinner fa-spin");
+
+                        if (UserId == "") {
+
+                            document.getElementById('defaultTitle').innerHTML = 'Invalid User Id!!!';
+                            document.getElementById('defaultMessage').innerHTML = 'Unexpected error occoured. Refresh page and try again!';
+                            const modal = new bootstrap.Modal(document.getElementById('defaultModal'));
+                            modal.show();
+
+                        } else {
+
+                            hr.open("POST", url, true); // asynchronous request
+                            hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                            hr.onreadystatechange = function() {
+                                if (hr.readyState == 4) {
+                                    $(".se-pre-con2").css('display', 'none');
+                                    if (hr.status == 200) {
+                                        var return_data = JSON.parse(hr.responseText);
+                                        if (return_data.success) {
+                                            document.getElementById('defaultTitle').innerHTML = return_data.success;
+                                            document.getElementById('defaultMessage').innerHTML = return_data.msg;
+                                            const modal = new bootstrap.Modal(document.getElementById('defaultModal'));
+                                            modal.show();
+                                            setTimeout(function() {
+                                                location.reload();
+                                            }, 5000);
+
+                                        } else {
+                                            document.getElementById('defaultTitle').innerHTML = 'An error occured!';
+                                            document.getElementById('defaultMessage').innerHTML = return_data.msg;
+                                            const modal = new bootstrap.Modal(document.getElementById('defaultModal'));
+                                            modal.show();
+                                        }
+                                    } else {
+
+                                        document.getElementById('defaultTitle').innerHTML = 'An error occured!';
+                                        document.getElementById('defaultMessage').innerHTML = 'An unexpected error occurred. Please try again later.';
+                                        const modal = new bootstrap.Modal(document.getElementById('defaultModal'));
+                                        modal.show();
+                                    }
+                                }
+                            }
+                            hr.send(vars); // Actually execute the request
+
+                        }
+
+                    }
                 </script>
 </body>
 

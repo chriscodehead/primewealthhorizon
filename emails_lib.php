@@ -59,7 +59,7 @@ class email
     }
 
 
-    public function generalMessage($subjt, $message, $email, $siteName, $siteDomain)
+    public function generalMessage($subjt, $message, $email)
     {
         $d = date('Y');
         $to  = $email;
@@ -74,6 +74,39 @@ class email
         } else {
             return 'Internal error. Mail fail to send';
         }
+    }
+
+    public function ActivateMail($email, $password, $fullname)
+    {
+        $to  = $email;
+        $d = date('F j, Y');
+        $subject = $this->siteName . " Successful Registration";
+        $message = '<h1>Your account was created successfully</h1><br />
+        
+        <h3>Congratulations ' . $fullname . '!</h3><br />
+
+        <p>We are delighted to inform you that your registration has been successfully completed! You are now an official member of a thriving community of passionate entrepreneurs dedicated to breaking barriers and building generational wealth. Welcome aboard!</p>
+        
+        <p>Follow this link to verify your account email. <a href="https://' . $this->siteDomain . '/ActivateMail/activate-email?id=' . $email . '&ip=' . $password . '">Verify Account Email</a> 
+        <br /><br /> OR Copy <br /><br />
+        <a href="https://' . $this->siteDomain . '/ActivateMail/activate-email?id=' . $email . '&ip=' . $password . '">https://' . $this->siteDomain . '/ActivateMail/activate-email?id=' . $email . '&ip=' . $password . '</a>
+        </p>
+        <br />
+
+        <p>Best regards,
+        ' . $this->siteName . ' Team<br /><br />
+        Powered by: <a href="https://primewealthhorizon.com">' . $this->siteName . '</a></p>';
+        $content = self::generalBody($message);
+        $header = "MIME-Version: 1.0" . "\r\n";
+        $header .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+        $header .= 'From: ' . $this->siteName . ' <support@' . $this->siteDomain . '>' . "\r\n";
+        $retval = @mail($to, $subject, $content, $header);
+        if ($retval = true) {
+            return  'Mail sent successfully. Check ' . $email . ' email account for `Email Activation Link`!';
+        } else {
+            return  'Internal error. Mail fail to send';
+        }
+        return $this;
     }
 
     public function updatewalletAddress($name, $email)
@@ -647,33 +680,6 @@ class email
         } else {
             return 'Invalid Email. Please ensure you typed it correctly';
         }
-    }
-
-    public function ActivateMail($email, $password, $fullname)
-    {
-        $to  = $email;
-        $d = date('F j, Y');
-        $subject = $this->siteName . " Successful Registration";
-        $message = '<h1>Product Design Application Status</h1><br />
-        
-        <h3>Congratulations ' . $fullname . '!</h3><br />
-
-        <p>We are thrilled to inform you that your registration for our Product Design Master Class has been successfully completed. You are now officially part of a vibrant community of passionate designers who are committed to pushing the boundaries of creativity and innovation.</p><br />
-
-        <p>Best regards,
-        ' . $this->siteName . ' Team<br /><br />
-        Powered by: <a href="https://primewealthhorizon.com">CENTADESK GLOBAL SERVICES</a></p>';
-        $content = self::generalBody($message);
-        $header = "MIME-Version: 1.0" . "\r\n";
-        $header .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-        $header .= 'From: ' . $this->siteName . ' <support@' . $this->siteDomain . '>' . "\r\n";
-        $retval = @mail($to, $subject, $content, $header);
-        if ($retval = true) {
-            return  'Mail sent successfully. Check ' . $email . ' email account for `Email Activation Link`!';
-        } else {
-            return  'Internal error. Mail fail to send';
-        }
-        return $this;
     }
 }
 $email_call = new email();

@@ -93,6 +93,7 @@ $siteLink = 'https://primewealthhorizon.com/accounts/register';
 $siteRegister = 'https://primewealthhorizon.com/accounts/register';
 $siteLogin = 'https://primewealthhorizon.com/accounts/login';
 $site = 'https://primewealthhorizon.com';
+$siteUrl = 'https://primewealthhorizon.com/store/';
 $domain = 'primewealthhorizon.com';
 $siteName = $row['site_name'];
 $siteEmail = "support@primewealthhorizon.com";

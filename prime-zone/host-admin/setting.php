@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
-
-<!-- Mirrored from themes.pixelstrap.net/zomo/landing/backend/profile-setting.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 12 Dec 2024 10:20:25 GMT -->
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -62,12 +60,12 @@
 <body>
     <!-- tap on top start-->
     <div class="tap-top">
-       <i class="ri-arrow-up-double-fill"></i>
+        <i class="ri-arrow-up-double-fill"></i>
     </div>
     <!-- tap on tap end-->
 
-     <!-- loader start -->
-     <div class="loader-wrapper"> 
+    <!-- loader start -->
+    <div class="loader-wrapper">
         <img src="assets/images/loader.gif" alt="">
     </div>
     <!-- loader end -->
@@ -84,7 +82,7 @@
                             <img class="img-fluid white-logo" src="assets/images/logo/1-white.png" alt="logo">
                         </a>
                     </div>
-                     <div class="toggle-sidebar">
+                    <div class="toggle-sidebar">
                         <i class="status_toggle middle sidebar-toggle" data-feather="align-center"></i>
                         <a href="index.html">
                             <img class="img-fluid for-light" src="assets/images/logo/1.png" alt="logo">
@@ -950,7 +948,7 @@
                                                     <div class="tab-pane fade" id="email" role="tabpanel"
                                                         aria-labelledby="email-tab">
                                                         <div class="general-details">
-                                                           <div class="row gy-md-4 gy-2 align-items-center">
+                                                            <div class="row gy-md-4 gy-2 align-items-center">
                                                                 <div class="col-xxl-3 col-xl-4 col-md-3">
                                                                     <h5>Mailer :</h5>
                                                                 </div>
@@ -966,14 +964,14 @@
                                                                 </div>
                                                                 <div class="col-xxl-9 col-xl-8 col-md-9">
                                                                     <input type="text" name="text"
-                                                                            placeholder="Enter Host">
+                                                                        placeholder="Enter Host">
                                                                 </div>
                                                                 <div class="col-xxl-3 col-xl-4 col-md-3">
                                                                     <h5>Port :</h5>
                                                                 </div>
                                                                 <div class="col-xxl-9 col-xl-8 col-md-9">
                                                                     <input type="text" name="text"
-                                                                            placeholder="Enter Port">
+                                                                        placeholder="Enter Port">
                                                                 </div>
                                                                 <div class="col-xxl-3 col-xl-4 col-md-3">
                                                                     <h5>Encryption :</h5>
@@ -991,30 +989,30 @@
                                                                 </div>
                                                                 <div class="col-xxl-9 col-xl-8 col-md-9">
                                                                     <input type="text" name="text"
-                                                                            placeholder="Enter Username">
+                                                                        placeholder="Enter Username">
                                                                 </div>
                                                                 <div class="col-xxl-3 col-xl-4 col-md-3">
                                                                     <h5>Password :</h5>
                                                                 </div>
                                                                 <div class="col-xxl-9 col-xl-8 col-md-9">
                                                                     <input type="password" name="number"
-                                                                            placeholder="Enter Password">
+                                                                        placeholder="Enter Password">
                                                                 </div>
                                                                 <div class="col-xxl-3 col-xl-4 col-md-3">
                                                                     <h5>Email From Name :</h5>
                                                                 </div>
                                                                 <div class="col-xxl-9 col-xl-8 col-md-9">
                                                                     <input type="text" name="text"
-                                                                            placeholder="Enter Email From Name">
+                                                                        placeholder="Enter Email From Name">
                                                                 </div>
                                                                 <div class="col-xxl-3 col-xl-4 col-md-3">
                                                                     <h5>EEmail From Address :</h5>
                                                                 </div>
                                                                 <div class="col-xxl-9 col-xl-8 col-md-9">
                                                                     <input type="text" name="text"
-                                                                            placeholder="Enter Email From Address">
+                                                                        placeholder="Enter Email From Address">
                                                                 </div>
-                                                           </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="tab-pane fade" id="vendor" role="tabpanel"
@@ -1168,7 +1166,7 @@
                                                         </div>
 
                                                         <div class="row gy-4 wallet-box">
-                                                            
+
                                                             <div class="col-md-9">
                                                                 <h5 class="mb-2">Min Withdraw Amount :</h5>
                                                                 <ul>
@@ -1193,19 +1191,19 @@
                                                         aria-labelledby="delivery-tab">
                                                         <div class="general-details mb-4">
                                                             <div class="row gy-md-4 gy-2 align-items-center">
-                                                                 <div class="col-xxl-3 col-xl-4 col-md-3">
-                                                                     <h5>Title :</h5>
-                                                                 </div>
-                                                                 <div class="col-xxl-9 col-xl-8 col-md-9">
-                                                                     <input type="text" name="text"
-                                                                             value="Standard Delivery">
-                                                                 </div>
-                                                                 <div class="col-xxl-3 col-xl-4 col-md-3">
+                                                                <div class="col-xxl-3 col-xl-4 col-md-3">
+                                                                    <h5>Title :</h5>
+                                                                </div>
+                                                                <div class="col-xxl-9 col-xl-8 col-md-9">
+                                                                    <input type="text" name="text"
+                                                                        value="Standard Delivery">
+                                                                </div>
+                                                                <div class="col-xxl-3 col-xl-4 col-md-3">
                                                                     <h5>Description : :</h5>
                                                                 </div>
                                                                 <div class="col-xxl-9 col-xl-8 col-md-9">
                                                                     <input type="text" name="text"
-                                                                            value="Approx 5 to 7 Days">
+                                                                        value="Approx 5 to 7 Days">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -1267,24 +1265,24 @@
                                                         aria-labelledby="payment-tab">
                                                         <nav class="payment-methods-tab">
                                                             <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                                              <button class="nav-link active" id="nav-paypal-tab" data-bs-toggle="tab" data-bs-target="#nav-paypal" type="button" role="tab" aria-controls="nav-paypal" aria-selected="true">
-                                                                <i class="ri-paypal-line"></i>
-                                                                PayPal</button>
-                                                              <button class="nav-link" id="nav-stripe-tab" data-bs-toggle="tab" data-bs-target="#nav-stripe" type="button" role="tab" aria-controls="nav-stripe" aria-selected="false"> 
-                                                                <i class="ri-creative-commons-nc-line"></i>
-                                                                Stripe</button>
-                                                              <button class="nav-link" id="nav-razorpay-tab" data-bs-toggle="tab" data-bs-target="#nav-razorpay" type="button" role="tab" aria-controls="nav-razorpay" aria-selected="false"> ₹ Razorpay</button>
-                                                              <button class="nav-link" id="nav-mollie-tab" data-bs-toggle="tab" data-bs-target="#nav-mollie" type="button" role="tab" aria-controls="nav-mollie" aria-selected="false">
-                                                                <i class="ri-money-euro-box-line"></i>
-                                                                Mollie</button>
-                                                              <button class="nav-link" id="nav-cod-tab" data-bs-toggle="tab" data-bs-target="#nav-cod" type="button" role="tab" aria-controls="nav-cod" aria-selected="false">
-                                                                <i class="ri-secure-payment-line"></i>
-                                                                COD</button>
+                                                                <button class="nav-link active" id="nav-paypal-tab" data-bs-toggle="tab" data-bs-target="#nav-paypal" type="button" role="tab" aria-controls="nav-paypal" aria-selected="true">
+                                                                    <i class="ri-paypal-line"></i>
+                                                                    PayPal</button>
+                                                                <button class="nav-link" id="nav-stripe-tab" data-bs-toggle="tab" data-bs-target="#nav-stripe" type="button" role="tab" aria-controls="nav-stripe" aria-selected="false">
+                                                                    <i class="ri-creative-commons-nc-line"></i>
+                                                                    Stripe</button>
+                                                                <button class="nav-link" id="nav-razorpay-tab" data-bs-toggle="tab" data-bs-target="#nav-razorpay" type="button" role="tab" aria-controls="nav-razorpay" aria-selected="false"> ₹ Razorpay</button>
+                                                                <button class="nav-link" id="nav-mollie-tab" data-bs-toggle="tab" data-bs-target="#nav-mollie" type="button" role="tab" aria-controls="nav-mollie" aria-selected="false">
+                                                                    <i class="ri-money-euro-box-line"></i>
+                                                                    Mollie</button>
+                                                                <button class="nav-link" id="nav-cod-tab" data-bs-toggle="tab" data-bs-target="#nav-cod" type="button" role="tab" aria-controls="nav-cod" aria-selected="false">
+                                                                    <i class="ri-secure-payment-line"></i>
+                                                                    COD</button>
                                                             </div>
                                                             <div class="tab-content" id="nav-tabContent">
                                                                 <div class="tab-pane fade show active" id="nav-paypal" role="tabpanel" aria-labelledby="nav-paypal-tab" tabindex="0">
                                                                     <div class="payment-methods-items">
-                                                                        <div class="icon-state align-items-center gap-5" >
+                                                                        <div class="icon-state align-items-center gap-5">
                                                                             <label class="switch-xsm mb-0">
                                                                                 <input type="checkbox"
                                                                                     id="flexSwitchCheckDefault-12"><span
@@ -1293,7 +1291,7 @@
                                                                             <label class="form-check-label"
                                                                                 for="flexSwitchCheckDefault-12">Status</label>
                                                                         </div>
-                                                                        <div class="icon-state align-items-center gap-5" >
+                                                                        <div class="icon-state align-items-center gap-5">
                                                                             <label class="switch-xsm mb-0">
                                                                                 <input type="checkbox"
                                                                                     id="flexSwitchCheckDefault-13" checked><span
@@ -1324,7 +1322,7 @@
                                                                 </div>
                                                                 <div class="tab-pane fade" id="nav-stripe" role="tabpanel" aria-labelledby="nav-stripe-tab" tabindex="0">
                                                                     <div class="payment-methods-items">
-                                                                        <div class="icon-state align-items-center gap-5" >
+                                                                        <div class="icon-state align-items-center gap-5">
                                                                             <label class="switch-xsm mb-0">
                                                                                 <input type="checkbox"
                                                                                     id="flexSwitchCheckDefault-16"><span
@@ -1355,7 +1353,7 @@
                                                                 </div>
                                                                 <div class="tab-pane fade" id="nav-razorpay" role="tabpanel" aria-labelledby="nav-razorpay-tab" tabindex="0">
                                                                     <div class="payment-methods-items">
-                                                                        <div class="icon-state align-items-center gap-5" >
+                                                                        <div class="icon-state align-items-center gap-5">
                                                                             <label class="switch-xsm mb-0">
                                                                                 <input type="checkbox"
                                                                                     id="flexSwitchCheckDefault-20" checked><span
@@ -1386,7 +1384,7 @@
                                                                 </div>
                                                                 <div class="tab-pane fade" id="nav-mollie" role="tabpanel" aria-labelledby="nav-mollie-tab" tabindex="0">
                                                                     <div class="payment-methods-items">
-                                                                        <div class="icon-state align-items-center gap-5" >
+                                                                        <div class="icon-state align-items-center gap-5">
                                                                             <label class="switch-xsm mb-0">
                                                                                 <input type="checkbox"
                                                                                     id="flexSwitchCheckDefault-14"><span
@@ -1408,7 +1406,7 @@
                                                                 </div>
                                                                 <div class="tab-pane fade" id="nav-cod" role="tabpanel" aria-labelledby="nav-cod-tab" tabindex="0">
                                                                     <div class="payment-methods-items">
-                                                                        <div class="icon-state align-items-center gap-5" >
+                                                                        <div class="icon-state align-items-center gap-5">
                                                                             <label class="switch-xsm mb-0">
                                                                                 <input type="checkbox"
                                                                                     id="flexSwitchCheckDefault-15" checked><span
@@ -1427,7 +1425,7 @@
                                                         <div class="analytics-box">
                                                             <div>
                                                                 <h6>Facebook Pixel</h6>
-                                                                <div class="icon-state align-items-center gap-5" >
+                                                                <div class="icon-state align-items-center gap-5">
                                                                     <label class="switch-xsm mb-0">
                                                                         <input type="checkbox"
                                                                             id="flexSwitchCheckDefault-18"><span
@@ -1444,7 +1442,7 @@
                                                                             </div>
                                                                             <div class="col-xxl-9 col-xl-8 col-md-9">
                                                                                 <input type="number" name="text"
-                                                                                    placeholder="1354077145459856"> 
+                                                                                    placeholder="1354077145459856">
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -1452,7 +1450,7 @@
                                                             </div>
                                                             <div>
                                                                 <h6>Google Analytics</h6>
-                                                                <div class="icon-state align-items-center gap-5" >
+                                                                <div class="icon-state align-items-center gap-5">
                                                                     <label class="switch-xsm mb-0">
                                                                         <input type="checkbox"
                                                                             id="flexSwitchCheckDefault-19" checked><span
@@ -1469,7 +1467,7 @@
                                                                             </div>
                                                                             <div class="col-xxl-9 col-xl-8 col-md-9">
                                                                                 <input type="text" name="text"
-                                                                                    placeholder="Enter Secret Key"> 
+                                                                                    placeholder="Enter Secret Key">
                                                                             </div>
                                                                             <div class="col-xxl-3 col-xl-4 col-md-3">
                                                                                 <h5>Secret :</h5>
@@ -1486,7 +1484,7 @@
                                                     </div>
                                                     <div class="tab-pane fade" id="reCaptcha" role="tabpanel"
                                                         aria-labelledby="reCaptcha-tab">
-                                                        <div class="icon-state mb-3 align-items-center gap-5" >
+                                                        <div class="icon-state mb-3 align-items-center gap-5">
                                                             <label class="switch-xsm mb-0">
                                                                 <input type="checkbox"
                                                                     id="flexSwitchCheckDefault-21" checked><span
@@ -1518,7 +1516,7 @@
                                                     </div>
                                                     <div class="tab-pane fade" id="maintenance" role="tabpanel"
                                                         aria-labelledby="maintenance-tab">
-                                                        <div class="icon-state align-items-center gap-5 mb-4" >
+                                                        <div class="icon-state align-items-center gap-5 mb-4">
                                                             <label class="switch-xsm mb-0">
                                                                 <input type="checkbox"
                                                                     id="flexSwitchCheckDefault-17" checked><span
@@ -1706,7 +1704,7 @@
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-cancel" type="button" data-bs-dismiss="modal"
-                    aria-label="Close">No</button>
+                        aria-label="Close">No</button>
                     <button class="btn btn-submit" type="submit" data-bs-dismiss="modal" aria-label="Close"><a href="login.html">Yes</a></button>
                 </div>
             </div>
@@ -1759,4 +1757,5 @@
 
 
 <!-- Mirrored from themes.pixelstrap.net/zomo/landing/backend/profile-setting.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 12 Dec 2024 10:20:37 GMT -->
+
 </html>

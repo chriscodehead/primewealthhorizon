@@ -1,54 +1,27 @@
 <?php
 require_once('include.php');
-$title = 'Dashboard | Add User';
+$title = 'Dashboard | Add New Admin';
 $bassic->checkLogedINAdmin('login');
-
+$msg = '';
+$role = '';
 if (isset($_POST['sub'])) {
-    $fname = mysqli_real_escape_string($link, $_POST['fname']);
-    $lname = mysqli_real_escape_string($link, $_POST['lname']);
-    $fullname = $fname . ' ' . $lname;
-    $email = mysqli_real_escape_string($link, $_POST['email']);
-    $phone = mysqli_real_escape_string($link, $_POST['phone']);
-    $pass = mysqli_real_escape_string($link, $_POST['pass']);
-    $cpass = mysqli_real_escape_string($link, $_POST['cpass']);
-    $user_code = $bassic->randGenerator();
-    $date_created = $bassic->getDate();
-    $last_updated = $bassic->getDate();
-    $rawpass = $pass;
-    $two_factor_code = $bassic->picker();
-    $forget_password_code = uniqid();
-    $passh = $bassic->passwordHash($agorithm, $pass);
-    $hashed_pot = $bassic->passwordHash($agorithm, $email);
-    $username = strtoupper($bassic->picker() . uniqid());
-
-    if (!empty($email) && !empty($fname) && !empty($lname) && !empty($pass)) {
-        if ($pass == $cpass) {
-            if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                if ($cal->checkifdataExists($email, 'email', $user_tb) == 1) {
-                    $msg = "Error! The email address entered already exists";
-                } else if ($cal->checkifdataExists($email, 'email', $user_tb) == 0) {
-                    if ($cal->checkifdataExists($username, 'client_username', $user_tb) == 1) {
-                        $msg = "Error! The username entered already exists.";
-                    } else if ($cal->checkifdataExists($username, 'client_username', $user_tb) == 0) {
-                        $feilds = array('id', 'user_code', 'client_username', 'fname', 'lname', 'email', 'phone',  'password', 'forget_password_code', 'two_factor_code', 'date_created', 'hashed_pot', 'last_updated');
-                        $value = array(null, $user_code, $username, $fname, $lname, $email, $phone, $passh, $forget_password_code, $two_factor_code, $date_created, $hashed_pot, $last_updated);
-                        $result = $cal->insertDataB($user_tb, $feilds, $value);
-                        if ($result == 'Registration was successful. Proceed to login!') {
-                            $msg = 'Success! The user has been created successfully.';
-                            @$email_call->ActivateMail($email, $pass, $fullname);
-                        } else {
-                            $msg = $result;
-                        }
-                    }
-                }
-            } else {
-                $msg = 'Error! Please enter a valid email address.';
-            }
-        } else {
-            $msg = "Error! Passwords do not match.";
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $passwordh = $bassic->passwordHash($agorithm, $password);
+    $role = $_POST['role'];
+    if (!empty($name) && !empty($email) && !empty($password) && !empty($role)) {
+        $emailcheck = $cal->checkifdataExists($email, 'email', $admin_tb);
+        if ($emailcheck == 0) {
+            $fields = array('id', 'email', 'password', 'name', 'blocked_account', 'role');
+            $values = array(null, $email, $passwordh, $name, '0', $role);
+            $in = $cal->insertData($admin_tb, $fields, $values);
+            $msg = 'Admin account was created successfully!';
+        } else if ($emailcheck == 1) {
+            $msg = 'Error! Email already exists.';
         }
     } else {
-        $msg = "Error! Please complete all required fields.";
+        $msg = 'Please fill all fields';
     }
 }
 ?>
@@ -83,7 +56,7 @@ if (isset($_POST['sub'])) {
                                     <div class="col-12">
                                         <div class="card">
                                             <div class="card-header">
-                                                <h5>Add New User</h5>
+                                                <h5>Add New Admin</h5>
                                             </div>
                                             <div class="card-body">
                                                 <div class="row">
@@ -102,45 +75,37 @@ if (isset($_POST['sub'])) {
 
                                                                         <div class="col-6">
                                                                             <div class="input-box">
-                                                                                <h6>First Name<span class="text-danger">*</span></h6>
-                                                                                <input type="text" name="fname" placeholder="Enter First Name">
+                                                                                <h6>Admin Name<span class="text-danger">*</span></h6>
+                                                                                <input id="name" value="<?php if (!empty($name)) print $name; ?>" required name="name" placeholder="Enter Admin Name" type="text">
                                                                             </div>
                                                                         </div>
 
                                                                         <div class="col-6">
                                                                             <div class="input-box">
-                                                                                <h6>Last Name<span class="text-danger">*</span></h6>
-                                                                                <input type="text" name="lname" placeholder="Enter Last Name">
-                                                                            </div>
-                                                                        </div>
-
-                                                                        <div class="col-6">
-                                                                            <div class="input-box">
-                                                                                <h6>Email<span class="text-danger">*</span></h6>
-                                                                                <input type="email" name="email" placeholder="Enter Email">
-                                                                            </div>
-                                                                        </div>
-
-                                                                        <div class="col-6">
-                                                                            <div class="input-box">
-                                                                                <h6>Phone Number</h6>
-                                                                                <input type="tel" name="phone" placeholder="Enter Phone Number">
+                                                                                <h6>Admin Email<span class="text-danger">*</span></h6>
+                                                                                <input id="email" value="<?php if (!empty($email)) print $email; ?>" required name="email" placeholder="Enter Admin Email" type="email">
                                                                             </div>
                                                                         </div>
 
                                                                         <div class="col-6">
                                                                             <div class="input-box">
                                                                                 <h6>Password<span class="text-danger">*</span></h6>
-                                                                                <input type="password" name="pass" placeholder="Enter Your Password">
+                                                                                <input id="password" value="<?php if (!empty($password)) print $password; ?>" required name="password" placeholder="Enter Admin Password" type="password">
                                                                             </div>
                                                                         </div>
 
                                                                         <div class="col-6">
                                                                             <div class="input-box">
-                                                                                <h6>Confirm Password<span class="text-danger">*</span></h6>
-                                                                                <input type="password" name="cpass" placeholder="Enter Your Confirm Password">
+                                                                                <h6>Admin Role<span class="text-danger">*</span></h6>
+                                                                                <select class="js-example-basic-single w-100" name="role" id="role">
+                                                                                    <option selected="selected" value="">Select Admin Role</option>
+                                                                                    <option <?php if ($role == 'admin1') echo 'selected="selected"'; ?> value="admin1">Admin1</option>
+                                                                                    <option <?php if ($role == 'admin2') echo 'selected="selected"'; ?> value="admin2">Admin2</option>
+                                                                                    <option <?php if ($role == 'admin3') echo 'selected="selected"'; ?> value="admin3">Admin3</option>
+                                                                                </select>
                                                                             </div>
                                                                         </div>
+
                                                                     </div>
                                                                 </div>
                                                             </div>
