@@ -119,11 +119,8 @@ $row = mysqli_fetch_assoc($sql);
                  </div>
                 </div>
                </div>
-
               </div>
              </div>
-
-
             </div>
            </div>
 

@@ -129,6 +129,7 @@ $leader_commision = 'leader_commision';
 $leaders_benefit = 'leaders_benefit';
 $category_tb = 'category_tb';
 $product = 'product';
+$orders = 'orders';
 
 class Cal extends DBConnection
 {
@@ -201,6 +202,7 @@ class Cal extends DBConnection
     protected $leaders_benefit = 'leaders_benefit';
     protected $category_tb = 'category_tb';
     protected $product = 'product';
+    protected $orders = 'orders';
 
     private static function generateQuestionMark($arr)
     {

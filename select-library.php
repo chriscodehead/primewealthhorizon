@@ -17,6 +17,7 @@ $top_up = 'top_up';
 $my_savings = 'my_savings';
 $category_tb = 'category_tb';
 $product = 'product';
+$orders = 'orders';
 
 class select extends DBConnection
 {
@@ -44,6 +45,7 @@ class select extends DBConnection
 	protected $my_savings = 'my_savings';
 	protected $category_tb = 'category_tb';
 	protected $product = 'product';
+	protected $orders = 'orders';
 
 	public function PendingInvestment($email)
 	{

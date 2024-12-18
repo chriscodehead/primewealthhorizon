@@ -22,7 +22,7 @@ class sqli
 	protected $leaders_benefit = 'leaders_benefit';
 	protected $category_tb = 'category_tb';
 	protected $product = 'product';
-
+	protected $orders = 'orders';
 
 	function countProductByCategory($categoryId)
 	{
@@ -38,6 +38,22 @@ class sqli
 	public function getCategoryTable($categoryID, $selectItem)
 	{
 		$sql = "SELECT * FROM $this->category_tb WHERE `category_id`='" . $categoryID . "' ";
+		$stmt = query_sql($sql);
+		$row = mysqli_fetch_assoc($stmt);
+		return $row[$selectItem];
+	}
+
+	public function getProductTable($prodcutID, $selectItem)
+	{
+		$sql = "SELECT * FROM $this->product WHERE `product_id`='" . $prodcutID . "' ";
+		$stmt = query_sql($sql);
+		$row = mysqli_fetch_assoc($stmt);
+		return $row[$selectItem];
+	}
+
+	public function getUserTable($userID, $selectItem)
+	{
+		$sql = "SELECT * FROM $this->user_tb WHERE `user_code`='" . $userID . "' ";
 		$stmt = query_sql($sql);
 		$row = mysqli_fetch_assoc($stmt);
 		return $row[$selectItem];
