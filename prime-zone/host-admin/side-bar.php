@@ -1,7 +1,7 @@
 <div class="sidebar-wrapper">
  <div>
   <div class="logo-wrapper logo-wrapper-center">
-   <a href="index.html" data-bs-original-title="" title="">
+   <a href="./" data-bs-original-title="" title="">
     <img class="img-fluid for-white" src="../../img/logo1.png" alt="logo">
    </a>
    <div class="back-btn">
@@ -12,7 +12,7 @@
    </div>
   </div>
   <div class="logo-icon-wrapper">
-   <a href="index.html">
+   <a href="./">
     <img class="img-fluid main-logo" src="../../img/logo1.png" alt="logo">
    </a>
   </div>
@@ -94,6 +94,21 @@
      </li>
 
      <li class="sidebar-list">
+      <a class="sidebar-link sidebar-title" href="javascript:void(0)">
+       <i class="ri-archive-line"></i>
+       <span>Orders</span>
+      </a>
+      <ul class="sidebar-submenu">
+       <li>
+        <a href="order-list">Order List</a>
+       </li>
+       <li>
+        <a href="order-detail">Order Detail</a>
+       </li>
+      </ul>
+     </li>
+
+     <li style="display: none;" class="sidebar-list">
       <a class="linear-icon-link sidebar-link sidebar-title" href="javascript:void(0)">
        <i class="ri-list-settings-line"></i>
        <span>Attributes</span>
@@ -108,21 +123,21 @@
       </ul>
      </li>
 
-     <li class="sidebar-list">
+     <li style="display: none;" class="sidebar-list">
       <a class="sidebar-link sidebar-title link-nav" href="restaurants.html">
        <i class="ri-shopping-bag-2-line"></i>
        <span>Restaurants</span>
       </a>
      </li>
 
-     <li class="sidebar-list">
+     <li style="display: none;" class="sidebar-list">
       <a class="sidebar-link sidebar-title link-nav" href="drivers.html">
        <i class="ri-car-line"></i>
        <span>Drivers</span>
       </a>
      </li>
 
-     <li class="sidebar-list">
+     <li style="display: none;" class="sidebar-list">
       <a class="linear-icon-link sidebar-link sidebar-title" href="javascript:void(0)">
        <i class="ri-bowl-line"></i>
        <span>Foods</span>
@@ -137,7 +152,7 @@
       </ul>
      </li>
 
-     <li class="sidebar-list">
+     <li style="display: none;" class="sidebar-list">
       <a class="sidebar-link sidebar-title" href="javascript:void(0)">
        <i class="ri-user-3-line"></i>
        <span>Roles</span>
@@ -152,39 +167,21 @@
       </ul>
      </li>
 
-     <li class="sidebar-list">
+     <li style="display: none;" class="sidebar-list">
       <a class="sidebar-link sidebar-title link-nav" href="media.html">
        <i class="ri-price-tag-3-line"></i>
        <span>Media</span>
       </a>
      </li>
 
-     <li class="sidebar-list">
+     <li style="display: none;" class="sidebar-list">
       <a class="sidebar-link sidebar-title link-nav" href="live-traking.html">
        <i class="ri-road-map-line"></i>
        <span>Live Traking</span>
       </a>
      </li>
 
-     <li class="sidebar-list">
-      <a class="sidebar-link sidebar-title" href="javascript:void(0)">
-       <i class="ri-archive-line"></i>
-       <span>Orders</span>
-      </a>
-      <ul class="sidebar-submenu">
-       <li>
-        <a href="order-list.html">Order List</a>
-       </li>
-       <li>
-        <a href="order-detail.html">Order Detail</a>
-       </li>
-       <li>
-        <a href="order-tracking.html">Order Tracking</a>
-       </li>
-      </ul>
-     </li>
-
-     <li class="sidebar-list">
+     <li style="display: none;" class="sidebar-list">
       <a class="linear-icon-link sidebar-link sidebar-title" href="javascript:void(0)">
        <i class="ri-focus-3-line"></i>
        <span>Localization</span>
@@ -199,7 +196,7 @@
       </ul>
      </li>
 
-     <li class="sidebar-list">
+     <li style="display: none;" class="sidebar-list">
       <a class="linear-icon-link sidebar-link sidebar-title" href="javascript:void(0)">
        <i class="ri-price-tag-3-line"></i>
        <span>Coupons</span>
@@ -214,14 +211,14 @@
       </ul>
      </li>
 
-     <li class="sidebar-list">
+     <li style="display: none;" class="sidebar-list">
       <a class="sidebar-link sidebar-title link-nav" href="taxes.html">
        <i class="ri-price-tag-3-line"></i>
        <span>Tax</span>
       </a>
      </li>
 
-     <li class="sidebar-list">
+     <li style="display: none;" class="sidebar-list">
       <a class="sidebar-link sidebar-title link-nav" href="product-review.html">
        <i class="ri-star-line"></i>
        <span>Product Review</span>
@@ -229,7 +226,7 @@
      </li>
 
      <li class="sidebar-list">
-      <a class="sidebar-link sidebar-title link-nav" href="support-ticket.html">
+      <a class="sidebar-link sidebar-title link-nav" href="support-ticket">
        <i class="ri-phone-line"></i>
        <span>Support Ticket</span>
       </a>
@@ -248,16 +245,9 @@
      </li>
 
      <li class="sidebar-list">
-      <a class="sidebar-link sidebar-title link-nav" href="reports.html">
+      <a class="sidebar-link sidebar-title link-nav" href="reports">
        <i class="ri-file-chart-line"></i>
        <span>Reports</span>
-      </a>
-     </li>
-
-     <li class="sidebar-list">
-      <a class="sidebar-link sidebar-title link-nav" href="list-page.html">
-       <i class="ri-list-check"></i>
-       <span>List Page</span>
       </a>
      </li>
 

@@ -102,6 +102,7 @@ $sitePhone = $row['site_phone'];
 $sitePhone2 = $row['site_phone'];
 $siteWhatsApp = $row['site_whatsapp_num'];
 $siteAddress = $row['site_address'];
+$siteCalender = 'https://calendly.com/revoobitinternationalusa';
 $user_tb = "user_tb";
 $deposit_tb = "deposit_td";
 $tickect_tb = 'ticket_tb';

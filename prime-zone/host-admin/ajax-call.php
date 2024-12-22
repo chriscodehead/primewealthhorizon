@@ -214,6 +214,80 @@ if (isset($_REQUEST['action'])) {
           }
      }
 
+     //approveOrderPayment
+     if ($_REQUEST['action'] == 'approveOrderPayment') {
+          $orderId = mysqli_real_escape_string($link, $_REQUEST['orderId']);
+          $user_id = $cal->selectFrmDB($orders, 'user_id', 'order_id', $orderId);
+          $user_email = $cal->selectFrmDB($user_tb, 'email', 'user_code', $user_id);
+          $order_payment_status = 'yes';
+
+          if (!empty($orderId)) {
+
+               $feilds = array('order_payment_status');
+               $value = array($order_payment_status);
+               $querry = $cal->update($orders, $feilds, $value, 'order_id', $orderId);
+
+               if ($querry == 'Update was successful') {
+
+                    $subjt = 'Starter Pack Payment Update!';
+                    $message = '<div style="width: 80%; margin-left: 5%; margin-right: 5%;  box-shadow: 0 16px 24px rgba(51, 51, 51, .08) !important; padding:5%; border: solid #fdfdfd;">
+         <img width="270" src="https://' . $domain . '/img/logo.png" /><br>
+         <div style="height: 20px; background: rgba(116, 105, 105, 0.08); margin-top: 30px; box-shadow: 0 16px 24px rgba(5, 5, 1, .08) !important;"></div><br><br>
+
+         <h4>Success! Your payment has been approved.</h4>
+         <p>Your payment has been successfully received. Your product will be shipped to the address you provided during the order process. Thank you for your purchase!<br><br>
+         Best regards,<br>' . $siteName . '</p></div>';
+                    @$email_call->generalMessage($subjt, $message, $user_email);
+
+                    $msg = 'Success! The payment status has been updated to approved.';
+                    echo json_encode(array('success' => 'Payment Approved!!!', 'msg' => $msg));
+               } else {
+                    $msg =  "An unexpected error occurred. Please try again later";
+                    echo json_encode(array('error' => 'Unexpected Error!!!', 'msg' => $msg));
+               }
+          } else {
+               $msg =  "An unexpected error has occurred. Please try again later.";
+               echo json_encode(array('error' => 'Unexpected Error!!!', 'msg' => $msg));
+          }
+     }
+
+     //cancelOrderPaymnet
+     if ($_REQUEST['action'] == 'cancelOrderPaymnet') {
+          $orderId = mysqli_real_escape_string($link, $_REQUEST['orderId']);
+          $order_payment_status = 'no';
+
+          if (!empty($orderId)) {
+               $feilds = array('order_payment_status');
+               $value = array($order_payment_status);
+               $querry = $cal->update($orders, $feilds, $value, 'order_id', $orderId);
+
+               if ($querry == 'Update was successful') {
+
+                    $msg = 'Success! The payment status has been updated to pending.';
+                    echo json_encode(array('success' => 'Payment Disapproved!!!', 'msg' => $msg));
+               } else {
+                    $msg =  "An unexpected error occurred. Please try again later";
+                    echo json_encode(array('error' => 'Unexpected Error!!!', 'msg' => $msg));
+               }
+          } else {
+               $msg =  "An unexpected error has occurred. Please try again later.";
+               echo json_encode(array('error' => 'Unexpected Error!!!', 'msg' => $msg));
+          }
+     }
+
+     //delOrder
+     if ($_REQUEST['action'] == 'delOrder') {
+          $orderId = mysqli_real_escape_string($link, $_REQUEST['orderId']);
+
+          if (query_sql("UPDATE $orders SET `delete_status`='" . $orderId . "' WHERE `order_id`='" . $orderId . "' LIMIT 1")) {
+               $msg = 'User account was successfully deleted!';
+               echo json_encode(array('success' => 'Successful Update!!!', 'msg' => $msg));
+          } else {
+               $msg = 'User failed to delete!';
+               echo json_encode(array('error' => 'Failed to delete!!!', 'msg' => $msg));
+          }
+     }
+
 
 
      //////////////////////////////ADMIN

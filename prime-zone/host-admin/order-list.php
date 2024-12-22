@@ -32,7 +32,7 @@ $bassic->checkLogedINAdmin('login'); ?>
                                 <div class="card-body">
                                     <div class="title-header option-title">
                                         <h5>Order List</h5>
-                                        <a href="#" class="btn btn-dashed">Download all orders</a>
+                                        <!-- <a href="#" class="btn btn-dashed">Download all orders</a> -->
                                     </div>
                                     <div>
                                         <div class="table-responsive theme-scrollbar">
@@ -54,7 +54,7 @@ $bassic->checkLogedINAdmin('login'); ?>
                                                 </thead>
 
                                                 <tbody>
-                                                    <?php $sql = query_sql("SELECT * FROM $product  ORDER BY id DESC");
+                                                    <?php $sql = query_sql("SELECT * FROM $orders WHERE `delete_status`='no' ORDER BY id DESC");
                                                     if (mysqli_num_rows($sql) > 0) {
                                                         $c = 0;
                                                         while ($row = mysqli_fetch_assoc($sql)) { ?>
@@ -64,48 +64,94 @@ $bassic->checkLogedINAdmin('login'); ?>
                                                                     <a class="d-block">
                                                                         <span class="order-image">
                                                                             <img src="../../photo/<?php print $sqli->getProductTable($row['product_id'], 'product_thumbnail'); ?>"
-                                                                                class="img-fluid" alt="users">
+                                                                                class="img-fluid" alt="IMG">
                                                                         </span>
                                                                     </a>
                                                                 </td>
 
                                                                 <td><?php print $row['order_id']; ?></td>
 
-                                                                <td><?php print $sqli->getUserTable($row['user_id'], 'email'); ?></td>
+                                                                <td><?php print @$sqli->getUserTable($row['user_id'], 'email'); ?></td>
 
                                                                 <td><?php print $row['order_qauntity']; ?></td>
 
                                                                 <td><?php print $row['order_price']; ?></td>
 
-                                                                <td><?php print $row['order_payment_method']; ?></td>
+                                                                <td><button class="btn btn-sm btn-primary text-dark"><?php print $row['order_payment_method']; ?></button></td>
 
-                                                                <td><?php print $row['order_payment_status']; ?></td>
+                                                                <td><?php if ($row['order_payment_status'] == 'yes') {
+                                                                        print '<button  class="btn btn-sm btn-warning text-dark" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#paymentApprove' . $row['order_id'] . '">Approved</button>';
+                                                                    } else {
+                                                                        print '<button class="btn btn-sm btn-primary text-dark" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#paymentPending' . $row['order_id'] . '">Pending</button>';
+                                                                    } ?>
+                                                                </td>
 
-                                                                <td><?php print $row['delivery_status']; ?></td>
+                                                                <div class="modal fade theme-modal remove-coupon" id="paymentPending<?php print $row['order_id']; ?>" aria-hidden="true" tabindex="-1">
+                                                                    <div class="modal-dialog modal-dialog-centered">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header d-block text-center">
+                                                                                <h5 class="modal-title w-100" id="exampleModalLabel22">Are You Sure ?</h5>
+                                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                                                                    <i class="fas fa-times"></i>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                <div class="remove-box">
+                                                                                    <p>Please confirm if you want to approve this order payment.</p>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <button type="button" class="btn btn-animation btn-md fw-bold" data-bs-dismiss="modal">No</button>
+                                                                                <button type="button" class="btn btn-animation btn-md fw-bold " onclick="approveOrderPayment('<?php print $row['order_id']; ?>')" data-bs-dismiss=" modal">Yes <i id="spin" class=""></i></button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
 
-                                                                <td class="order-success">
-                                                                    <span class="font-success f-w-500">Success</span>
+                                                                <div class="modal fade theme-modal remove-coupon" id="paymentApprove<?php print $row['order_id']; ?>" aria-hidden="true" tabindex="-1">
+                                                                    <div class="modal-dialog modal-dialog-centered">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header d-block text-center">
+                                                                                <h5 class="modal-title w-100" id="exampleModalLabel22">Are You Sure ?</h5>
+                                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                                                                    <i class="fas fa-times"></i>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                <div class="remove-box">
+                                                                                    <p>Please confirm if you want to cancel this order payment.</p>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <button type="button" class="btn btn-animation btn-md fw-bold" data-bs-dismiss="modal">No</button>
+                                                                                <button type="button" class="btn btn-animation btn-md fw-bold " onclick="cancelOrderPaymnet('<?php print $row['order_id']; ?>')" data-bs-dismiss=" modal">Yes <i id="spin" class=""></i></button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <td><?php if ($row['delivery_status'] == 'yes') {
+                                                                        print '<button  class="btn btn-sm btn-warning text-dark" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#deliveryApprove' . $row['order_id'] . '">Delivered</button>';
+                                                                    } else {
+                                                                        print '<button class="btn btn-sm btn-primary text-dark" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#deliveryPending' . $row['order_id'] . '">Processing</button>';
+                                                                    } ?>
                                                                 </td>
 
 
+                                                                <td><?php print $row['date_created']; ?></td>
 
                                                                 <td>
                                                                     <ul>
-                                                                        <li>
-                                                                            <a href="order-detail.html">
-                                                                                <i class="ri-eye-line"></i>
-                                                                            </a>
-                                                                        </li>
+
 
                                                                         <li>
-                                                                            <a href="javascript:void(0)">
+                                                                            <a href="order-detail?orderId=<?php print $row['order_id'] ?>">
                                                                                 <i class="ri-pencil-line"></i>
                                                                             </a>
                                                                         </li>
 
                                                                         <li>
-                                                                            <a href="javascript:void(0)" data-bs-toggle="modal"
-                                                                                data-bs-target="#exampleModalToggle">
+                                                                            <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#exampleModalToggle<?php print $row['order_id'] ?>">
                                                                                 <i class="ri-delete-bin-line"></i>
                                                                             </a>
                                                                         </li>
@@ -113,11 +159,33 @@ $bassic->checkLogedINAdmin('login'); ?>
                                                                 </td>
                                                                 <td>
                                                                     <a class="btn btn-sm btn-dashed text-white"
-                                                                        href="order-tracking.html">
+                                                                        href="order-tracking?orderId=<?php print $row['order_id'] ?>">
                                                                         Tracking
                                                                     </a>
                                                                 </td>
                                                             </tr>
+
+                                                            <div class="modal fade theme-modal remove-coupon" id="exampleModalToggle<?php print $row['order_id'] ?>" aria-hidden="true" tabindex="-1">
+                                                                <div class="modal-dialog modal-dialog-centered">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header d-block text-center">
+                                                                            <h5 class="modal-title w-100" id="exampleModalLabel22">Are You Sure ?</h5>
+                                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                                                                <i class="fas fa-times"></i>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <div class="remove-box">
+                                                                                <p>You are about to delete this order. Once this action is executed, it cannot be undone.</p>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-animation btn-md fw-bold" data-bs-dismiss="modal">No</button>
+                                                                            <button type="button" onclick="delOrder('<?php print $row['order_id']; ?>')" class="btn btn-animation btn-md fw-bold" data-bs-toggle="modal" data-bs-dismiss="modal">Yes <i id="spin" class=""></i></button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
 
                                                         <?php $c++;
                                                         }
@@ -136,31 +204,6 @@ $bassic->checkLogedINAdmin('login'); ?>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="modal fade theme-modal remove-coupon" id="exampleModalToggle" aria-hidden="true" tabindex="-1">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="modal-header d-block text-center">
-                                <h5 class="modal-title w-100" id="exampleModalLabel22">Are You Sure ?</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                                    <i class="fas fa-times"></i>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="remove-box">
-                                    <p>The permission for the use/group, preview is inherited from the object, object will create a
-                                        new permission for this object</p>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-animation btn-md fw-bold" data-bs-dismiss="modal">No</button>
-                                <button type="button" class="btn btn-animation btn-md fw-bold" data-bs-target="#exampleModalToggle2"
-                                    data-bs-toggle="modal" data-bs-dismiss="modal">Yes</button>
                             </div>
                         </div>
                     </div>
@@ -193,78 +236,169 @@ $bassic->checkLogedINAdmin('login'); ?>
                     </div>
                 </div>
 
-                <div class="offcanvas offcanvas-end order-offcanvas" tabindex="-1" id="order-details"
-                    aria-labelledby="offcanvasExampleLabel" aria-expanded="false">
-                    <div class="offcanvas-header">
-                        <h4 class="offcanvas-title" id="offcanvasExampleLabel">#573-685572</h4>
-                        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close">
-                            <i class="fas fa-times"></i>
-                        </button>
-                    </div>
-                    <div class="offcanvas-body">
-                        <div class="order-date">
-                            <h6>September 17, 2024 <span class="ms-3">8:12 PM</span></h6>
-                            <a href="javascript:void(0)" class="d-block mt-1">Cancel Order</a>
-                        </div>
-
-                        <div class="accordion accordion-flush custome-accordion" id="accordionFlushExample">
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="flush-headingOne">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                                        Status
-                                    </button>
-                                </h2>
-                                <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
-                                    data-bs-parent="#accordionFlushExample">
-                                    <div class="accordion-body">
-                                        <ul class="status-list">
-                                            <li>
-                                                <a href="javascript:void(0)">Shipped</a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:void(0)">Pending</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="flush-headingTwo">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-                                        Accordion Item #2
-                                    </button>
-                                </h2>
-                                <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo"
-                                    data-bs-parent="#accordionFlushExample">
-                                    <div class="accordion-body">Placeholder content for this accordion, which is intended to
-                                        demonstrate the <code>.accordion-flush</code> class. This is the second item's accordion
-                                        body. Let's imagine this being filled with some actual content.</div>
-                                </div>
-                            </div>
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="flush-headingThree">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#flush-collapseThree" aria-expanded="false"
-                                        aria-controls="flush-collapseThree">
-                                        Accordion Item #3
-                                    </button>
-                                </h2>
-                                <div id="flush-collapseThree" class="accordion-collapse collapse"
-                                    aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
-                                    <div class="accordion-body">Placeholder content for this accordion, which is intended to
-                                        demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion
-                                        body. Nothing more exciting happening here in terms of content, but just filling up the
-                                        space to make it look, at least at first glance, a bit more representative of how this would
-                                        look in a real-world application.</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
                 <?php require_once('footer.php'); ?>
+
+                <script>
+                    function delOrder(orderId) {
+                        var hr = new XMLHttpRequest();
+                        var url = "ajax-call.php?action=delOrder";
+                        var orderId = orderId;
+                        var vars = "orderId=" + orderId;
+                        $('i#spin').attr("class", "fa fa-spinner fa-spin");
+
+                        if (orderId == "") {
+
+                            document.getElementById('defaultTitle').innerHTML = 'Invalid Product Id!!!';
+                            document.getElementById('defaultMessage').innerHTML = 'Unexpected error occoured. Refresh page and try again!';
+                            const modal = new bootstrap.Modal(document.getElementById('defaultModal'));
+                            modal.show();
+
+                        } else {
+
+                            hr.open("POST", url, true); // asynchronous request
+                            hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                            hr.onreadystatechange = function() {
+                                if (hr.readyState == 4) {
+                                    $(".se-pre-con2").css('display', 'none');
+                                    if (hr.status == 200) {
+                                        var return_data = JSON.parse(hr.responseText);
+                                        if (return_data.success) {
+                                            const modal = new bootstrap.Modal(document.getElementById('exampleModalToggle2'));
+                                            modal.show();
+                                            setTimeout(function() {
+                                                location.reload();
+                                            }, 5000);
+
+                                        } else {
+                                            document.getElementById('defaultTitle').innerHTML = 'An error occured!';
+                                            document.getElementById('defaultMessage').innerHTML = return_data.msg;
+                                            const modal = new bootstrap.Modal(document.getElementById('defaultModal'));
+                                            modal.show();
+                                        }
+                                    } else {
+
+                                        document.getElementById('defaultTitle').innerHTML = 'An error occured!';
+                                        document.getElementById('defaultMessage').innerHTML = 'An unexpected error occurred. Please try again later.';
+                                        const modal = new bootstrap.Modal(document.getElementById('defaultModal'));
+                                        modal.show();
+                                    }
+                                }
+                            }
+                            hr.send(vars); // Actually execute the request
+
+                        }
+
+                    }
+
+                    //cancelOrderPaymnet
+                    function cancelOrderPaymnet(orderId) {
+                        var hr = new XMLHttpRequest();
+                        var url = "ajax-call.php?action=cancelOrderPaymnet";
+                        var orderId = orderId;
+                        var vars = "orderId=" + orderId;
+                        $('i#spin').attr("class", "fa fa-spinner fa-spin");
+
+                        if (orderId == "") {
+
+                            document.getElementById('defaultTitle').innerHTML = 'Invalid User Id!!!';
+                            document.getElementById('defaultMessage').innerHTML = 'Unexpected error occoured. Refresh page and try again!';
+                            const modal = new bootstrap.Modal(document.getElementById('defaultModal'));
+                            modal.show();
+
+                        } else {
+
+                            hr.open("POST", url, true); // asynchronous request
+                            hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                            hr.onreadystatechange = function() {
+                                if (hr.readyState == 4) {
+                                    $(".se-pre-con2").css('display', 'none');
+                                    if (hr.status == 200) {
+                                        var return_data = JSON.parse(hr.responseText);
+                                        if (return_data.success) {
+                                            document.getElementById('defaultTitle').innerHTML = return_data.success;
+                                            document.getElementById('defaultMessage').innerHTML = return_data.msg;
+                                            const modal = new bootstrap.Modal(document.getElementById('defaultModal'));
+                                            modal.show();
+                                            setTimeout(function() {
+                                                location.reload();
+                                            }, 5000);
+
+                                        } else {
+                                            document.getElementById('defaultTitle').innerHTML = 'An error occured!';
+                                            document.getElementById('defaultMessage').innerHTML = return_data.msg;
+                                            const modal = new bootstrap.Modal(document.getElementById('defaultModal'));
+                                            modal.show();
+                                        }
+                                    } else {
+
+                                        document.getElementById('defaultTitle').innerHTML = 'An error occured!';
+                                        document.getElementById('defaultMessage').innerHTML = 'An unexpected error occurred. Please try again later.';
+                                        const modal = new bootstrap.Modal(document.getElementById('defaultModal'));
+                                        modal.show();
+                                    }
+                                }
+                            }
+                            hr.send(vars); // Actually execute the request
+
+                        }
+
+                    }
+
+                    //approveOrderPayment  
+                    function approveOrderPayment(orderId) {
+                        var hr = new XMLHttpRequest();
+                        var url = "ajax-call.php?action=approveOrderPayment";
+                        var orderId = orderId;
+                        var vars = "orderId=" + orderId;
+                        $('i#spin').attr("class", "fa fa-spinner fa-spin");
+
+                        if (orderId == "") {
+
+                            document.getElementById('defaultTitle').innerHTML = 'Invalid User Id!!!';
+                            document.getElementById('defaultMessage').innerHTML = 'Unexpected error occoured. Refresh page and try again!';
+                            const modal = new bootstrap.Modal(document.getElementById('defaultModal'));
+                            modal.show();
+
+                        } else {
+
+                            hr.open("POST", url, true); // asynchronous request
+                            hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                            hr.onreadystatechange = function() {
+                                if (hr.readyState == 4) {
+                                    $(".se-pre-con2").css('display', 'none');
+                                    if (hr.status == 200) {
+                                        var return_data = JSON.parse(hr.responseText);
+                                        if (return_data.success) {
+                                            document.getElementById('defaultTitle').innerHTML = return_data.success;
+                                            document.getElementById('defaultMessage').innerHTML = return_data.msg;
+                                            const modal = new bootstrap.Modal(document.getElementById('defaultModal'));
+                                            modal.show();
+                                            setTimeout(function() {
+                                                location.reload();
+                                            }, 5000);
+
+                                        } else {
+                                            document.getElementById('defaultTitle').innerHTML = 'An error occured!';
+                                            document.getElementById('defaultMessage').innerHTML = return_data.msg;
+                                            const modal = new bootstrap.Modal(document.getElementById('defaultModal'));
+                                            modal.show();
+                                        }
+                                    } else {
+
+                                        document.getElementById('defaultTitle').innerHTML = 'An error occured!';
+                                        document.getElementById('defaultMessage').innerHTML = 'An unexpected error occurred. Please try again later.';
+                                        const modal = new bootstrap.Modal(document.getElementById('defaultModal'));
+                                        modal.show();
+                                    }
+                                }
+                            }
+                            hr.send(vars); // Actually execute the request
+
+                        }
+
+                    }
+                </script>
+
 </body>
 
 </html>
