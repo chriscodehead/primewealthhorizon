@@ -12,8 +12,7 @@
        <img src="img/footer.png" alt="..." style="width: 120px;" />
       </a>
       <p class="text">
-       We are a team of dedicated financial experts committed to
-       guiding you towards financial growth and success.
+       At <?php print $siteName; ?>, we are dedicated to helping individuals and businesses achieve their full potential.
       </p>
 
       <div class="social-icon">

@@ -314,7 +314,7 @@ require_once('head.php'); ?>
             <div class="feature-body">
               <h5 class="feature-title">Join as a Marketing Affiliate</h5>
               <p>Partner with us to earn commissions by promoting our premium products.</p>
-              <a href="#" class="more-btn">
+              <a href="prime-affiliate/register" class="more-btn">
                 <span>Become An Affiliate</span>
                 <span class="svg-icon">
                   <svg
@@ -362,7 +362,7 @@ require_once('head.php'); ?>
             <div class="feature-body">
               <h5 class="feature-title">Let’s Grow Your Business</h5>
               <p>Fill out a form and tell us how we can help you achieve business success.</p>
-              <a href="#" class="more-btn">
+              <a href="contact" class="more-btn">
                 <span>Learn More</span>
                 <span class="svg-icon">
                   <svg
@@ -496,6 +496,55 @@ require_once('head.php'); ?>
             </div>
           </div>
         </div>
+
+        <div class="col">
+          <div class="feature-card style-3">
+            <img
+              class="feature-icon"
+              src="img/Mirracare-cant-be-fired.jpg"
+              alt="..." />
+            <div class="feature-body">
+              <h5 class="feature-title">Can't Be Fired</h5>
+              <p>Discover How I Overcame Job Loss and Found Stability</p>
+              <a target="_blank" href="https://cantbefired.revoobitusa.com/" class="more-btn">
+                <span>Learn More</span>
+                <span class="svg-icon">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="18"
+                    height="19"
+                    viewBox="0 0 18 19"
+                    fill="none">
+                    <path
+                      d="M1.7085 9.01147H16.2918H1.7085ZM16.2918 9.01147L9.29183 2.01147L16.2918 9.01147ZM16.2918 9.01147L9.29183 16.0115L16.2918 9.01147Z"
+                      fill="#030917" />
+                    <path
+                      d="M1.7085 9.01147H16.2918M16.2918 9.01147L9.29183 2.01147M16.2918 9.01147L9.29183 16.0115"
+                      stroke="#030917"
+                      stroke-linecap="round"
+                      stroke-linejoin="round" />
+                  </svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="18"
+                    height="19"
+                    viewBox="0 0 18 19"
+                    fill="none">
+                    <path
+                      d="M1.7085 9.01147H16.2918H1.7085ZM16.2918 9.01147L9.29183 2.01147L16.2918 9.01147ZM16.2918 9.01147L9.29183 16.0115L16.2918 9.01147Z"
+                      fill="#030917" />
+                    <path
+                      d="M1.7085 9.01147H16.2918M16.2918 9.01147L9.29183 2.01147M16.2918 9.01147L9.29183 16.0115"
+                      stroke="#030917"
+                      stroke-linecap="round"
+                      stroke-linejoin="round" />
+                  </svg>
+                </span>
+              </a>
+            </div>
+          </div>
+        </div>
+
       </div>
 
       <div class="ak-height-50 ak-height-lg-30"></div>
@@ -688,9 +737,9 @@ require_once('head.php'); ?>
           class="ak-section-heading ak-style-1 animation-title-content animation-style3 ak-w-50">
           <p class="ak-section-subtitle animation-title">Services</p>
           <h2 class="ak-section-title animation-title">
-            Expert Financial Solutions Tailored to Your Needs
+            Expert Financial Consultation Tailored to Your Needs
           </h2>
-          <p>At <?php print $siteName; ?>, we offer a wide range of consulting and management services designed to empower businesses and drive success. Explore our comprehensive offerings:</p>
+          <p>At <?php print $siteName; ?>, we offer a wide range of consulting and management services designed to empower individuals, businesses and drive success. Explore our comprehensive offerings:</p>
         </div>
         <div class="service-swiper-controller">
           <button class="service-next-btn slider-btn next">
