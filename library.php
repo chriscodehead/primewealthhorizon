@@ -368,13 +368,12 @@ class Cal extends DBConnection
                             $feilds = array('last_login');
                             $value = array($last_login);
                             self::update($this->user_tb, $feilds, $value, 'email', $email);
-
                             header("location:" . $page);
                             return 'go';
                         }
                     } else {
-                        return 'Sorry you can not access your account because your email has not been activated. I have not received any email <button name="sendmailac" class="btn btn-theme" type="submit">Resend Activation Email?</button> OR Check your spam<br />';
-                    } //activate email <a  data-toggle="modal" href="#myModalAC"  style="color:#06C; font-size:16px;"> <u>Resend Activation Email?</u></a>
+                        return "Sorry you can not access your account because your email has not been activated. I have not received any email <button onclick=resendEmailActivation('$email'); name=sendmailac class='btn btn-theme' type=button>Resend Activation Email?</button> OR Check your spam<br />";
+                    }
                 } else {
                     return 'Invalid email / password combination!';
                 }

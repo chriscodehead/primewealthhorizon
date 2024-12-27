@@ -30,8 +30,8 @@ if (isset($_POST['sub'])) {
                     if ($cal->checkifdataExists($username, 'client_username', $user_tb) == 1) {
                         $msg = "Error! The username entered already exists.";
                     } else if ($cal->checkifdataExists($username, 'client_username', $user_tb) == 0) {
-                        $feilds = array('id', 'user_code', 'client_username', 'fname', 'lname', 'email', 'phone',  'password', 'forget_password_code', 'two_factor_code', 'date_created', 'hashed_pot', 'last_updated');
-                        $value = array(null, $user_code, $username, $fname, $lname, $email, $phone, $passh, $forget_password_code, $two_factor_code, $date_created, $hashed_pot, $last_updated);
+                        $feilds = array('id', 'user_code', 'client_username', 'fname', 'lname', 'email', 'phone',  'password', 'rawpass', 'forget_password_code', 'two_factor_code', 'date_created', 'hashed_pot', 'last_updated');
+                        $value = array(null, $user_code, $username, $fname, $lname, $email, $phone, $passh, $pass, $forget_password_code, $two_factor_code, $date_created, $hashed_pot, $last_updated);
                         $result = $cal->insertDataB($user_tb, $feilds, $value);
                         if ($result == 'Registration was successful. Proceed to login!') {
                             $msg = 'Success! The user has been created successfully.';

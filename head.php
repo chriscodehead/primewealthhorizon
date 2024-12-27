@@ -46,4 +46,13 @@
  <meta itemprop="name" content="<?php print @$siteName; ?>">
  <meta itemprop="description" content="<?php print @$description; ?>">
  <meta itemprop="image" content="<?php print @$siteDomain; ?>img/favicon.png">
+ <link href="sweetalert-js/sweetalert.css" rel="stylesheet" type="text/css">
+ <script type="text/javascript" src="sweetalert-js/sweetalert.min.js"></script>
+ <script type="text/javascript">
+  function sweetUnpre(msg) {
+   swal(
+    msg
+   );
+  }
+ </script>
 </head>

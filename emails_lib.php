@@ -102,11 +102,98 @@ class email
         $header .= 'From: ' . $this->siteName . ' <support@' . $this->siteDomain . '>' . "\r\n";
         $retval = @mail($to, $subject, $content, $header);
         if ($retval = true) {
-            return  'Mail sent successfully. Check ' . $email . ' email account for `Email Activation Link`!';
+            return  'Mail sent successfully. Check ' . $email . ' for Email Activation Link!';
         } else {
             return  'Internal error. Mail fail to send';
         }
         return $this;
+    }
+
+    public function forgetpassword($email, $tablename, $fieldname)
+    {
+        $d = date('F j, Y');
+        $credentialCheck = "SELECT * FROM $tablename WHERE $fieldname = :adddata limit 1";
+        $dbs = new DBConnection();
+        $db = $dbs->DBConnections();
+        $stmt  = $db->prepare($credentialCheck);
+        $stmt->bindValue(':adddata', $email);
+        if ($stmt->execute()) {
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            $password = $row['password'];
+            $name = $row['fname'];
+            $resetpassword_id = $row['forget_password_code'];
+            $to  = $email;
+            $subject = "Forgot Password  Recovery Centre";
+            $message = '<h2 style="font-size: 18px; color: #6576ff; font-weight: 600; margin: 0;">Reset Password</h2>
+            <p style="margin-bottom: 10px;">Hi ' . $name . ',</p>
+            <p style="margin-bottom: 25px;">Click On The link blow to reset your password.</p>
+            <a href="https://' . $this->siteDomain . '/fogetpassword/recover.php?id=' . $email . '&ip=' . $password . '&it=' . $resetpassword_id . '" style="background-color:#6576ff;border-radius:4px;color:#ffffff;display:inline-block;font-size:13px;font-weight:600;line-height:44px;text-align:center;text-decoration:none;text-transform: uppercase; padding: 0 25px">Reset Password</a>
+            <br />
+            <br />
+
+            <a href="https://' . $this->siteDomain . '/fogetpassword/recover.php?id=' . $email . '&ip=' . $password . '&it=' . $resetpassword_id . '">
+            https://' . $this->siteDomain . '/fogetpassword/recover.php?id=' . $email . '&ip=' . $password . '&it=' . $resetpassword_id . '
+            </a>
+
+            <p>If you did not make this request, please contact us or ignore this message.</p>
+            <p style="margin: 0; font-size: 13px; line-height: 22px; color:#9ea8bb;">This is an automatically generated email please do not reply to this email. If you face any issues, please contact us at  support@' . $this->siteDomain . '</p>';
+
+            $content = self::generalBody($message);
+            $header = "MIME-Version: 1.0" . "\r\n";
+            $header .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+            $header .= 'From: ' . $this->siteName . ' <support@' . $this->siteDomain . '>' . "\r\n";
+            $retval = @mail($to, $subject, $content, $header);
+            if ($retval) {
+                return  'Mail sent successfully. Check your Mail for Activation Link';
+            } else {
+                return  'Internal error. Mail fail to send';
+            }
+        } else {
+            return 'Invalid Email. Please ensure you typed it correctly';
+        }
+    }
+
+    public function contactUsMail($name, $phone, $email, $subject, $message, $country, $state)
+    {
+        $to  = 'support@' . $this->siteDomain;
+        $subject = $subject;
+        $info = $message . '<br /></br>
+        <strong>
+        Name: ' . $name . ',<br />
+        Email: ' . $email . ',<br />
+        Phone: ' . $phone . ',<br />
+        Country: ' . $country . ',<br />
+        State: ' . $state . '
+        </strong>';
+        $content = self::generalBody($info);
+        $headers = "MIME-Version: 1.0" . "\r\n";
+        $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+        $headers .= 'From: ' . $this->siteName . ' <support@' . $this->siteDomain . '>' . "\r\n";
+        $retval = @mail($to, $subject, $content, $headers);
+        if ($retval) {
+            self::autoReplyMail($name, $email, $subject);
+            return  'Mail sent successfully';
+        } else {
+            return 'Internal error. Mail fail to send';
+        }
+    }
+
+    public function autoReplyMail($name, $email, $subj)
+    {
+        $to  = $email;
+        $d = date('F j, Y');
+        $subject = 'Auto-Reply';
+        $info = 'Hi ' . $name . ', Your message has been received. Thank you for contacting us. We will get back to you as soon as possible.';
+        $content = self::generalBody($info);
+        $headers = "MIME-Version: 1.0" . "\r\n";
+        $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+        $headers .= 'From: ' . $this->siteName . ' <support@' . $this->siteDomain . '>' . "\r\n";
+        $retval = @mail($to, $subject, $content, $headers);
+        if ($retval) {
+            return   'Mail sent successfully';
+        } else {
+            return  'Internal error. Mail fail to send';
+        }
     }
 
     public function updatewalletAddress($name, $email)
@@ -296,25 +383,6 @@ class email
         }
     }
 
-    public function contactUsMail($name, $phone, $email, $subject, $message)
-    {
-        $to  = 'support@' . $this->siteDomain;
-        $subject = $subject;
-        $info = $message . '<br /></br><strong>Name: ' . $name . ',<br />Email: ' . $email . ', <br />Phone: ' . $phone . ' </strong>';
-        $content = self::generalBody($info);
-        $headers = "MIME-Version: 1.0" . "\r\n";
-        $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-        $headers .= 'From: ' . $this->siteName . ' <support@' . $this->siteDomain . '>' . "\r\n";
-        $retval = @mail($to, $subject, $content, $headers);
-        if ($retval) {
-            self::autoReplyMail($name, $email, $subject);
-            return  'Mail sent successfully';
-        } else {
-            return 'Internal error. Mail fail to send';
-        }
-    }
-
-
     public function paymentNotification($amount, $plan, $coin, $id, $name, $email)
     {
         $to  = $email;
@@ -500,23 +568,7 @@ class email
     }
 
 
-    public function autoReplyMail($name, $email, $subj)
-    {
-        $to  = $email;
-        $d = date('F j, Y');
-        $subject = 'Auto-Reply';
-        $info = 'Hi ' . $name . ', Your message has been received. Thank you for contacting us. We will get back to you as soon as possible.';
-        $content = self::generalBody($info);
-        $headers = "MIME-Version: 1.0" . "\r\n";
-        $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-        $headers .= 'From: ' . $this->siteName . ' <support@' . $this->siteDomain . '>' . "\r\n";
-        $retval = @mail($to, $subject, $content, $headers);
-        if ($retval) {
-            return   'Mail sent successfully';
-        } else {
-            return  'Internal error. Mail fail to send';
-        }
-    }
+
 
     public function MailDispatcha($email, $message, $title, $file)
     {
@@ -542,144 +594,6 @@ class email
             return 'Internal error. Mail fail to send';
         }
         return $this;
-    }
-
-    public function forgetpassword($email, $tablename, $fieldname)
-    {
-        $d = date('F j, Y');
-        $credentialCheck = "SELECT * FROM $tablename WHERE $fieldname = :adddata limit 1";
-        $dbs = new DBConnection();
-        $db = $dbs->DBConnections();
-        $stmt  = $db->prepare($credentialCheck);
-        $stmt->bindValue(':adddata', $email);
-        if ($stmt->execute()) {
-            $row = $stmt->fetch(PDO::FETCH_ASSOC);
-            $password = $row['password'];
-            $name = $row['first_name'];
-            $resetpassword_id = $row['forget_password_code'];
-            $to  = $email;
-            $subject = "Forgot Password  Recovery Centre";
-            $content = '<!DOCTYPE html><html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="x-apple-disable-message-reformatting"><title></title><link href="https://fonts.googleapis.com/css?family=Roboto:400,600" rel="stylesheet" type="text/css">
-    <!--[if mso]>
-        <style>
-            * {
-                font-family: \'Roboto\', sans-serif !important;
-            }
-        </style>
-    <![endif]-->
-    <!--[if !mso]>
-        <link href="https://fonts.googleapis.com/css?family=Roboto:400,600" rel="stylesheet" type="text/css">
-    <![endif]--><style>
-        html,body {
-            margin: 0 auto !important;
-            padding: 0 !important;
-            height: 100% !important;
-            width: 100% !important;
-            font-family: \'Roboto\', sans-serif !important;
-            font-size: 14px;
-            margin-bottom: 10px;
-            line-height: 24px;
-            color:#8094ae;
-            font-weight: 400;
-        }
-        * {
-            -ms-text-size-adjust: 100%;
-            -webkit-text-size-adjust: 100%;
-            margin: 0;
-            padding: 0;
-        }
-        table,
-        td {
-            mso-table-lspace: 0pt !important;
-            mso-table-rspace: 0pt !important;
-        }
-        table {
-            border-spacing: 0 !important;
-            border-collapse: collapse !important;
-            table-layout: fixed !important;
-            margin: 0 auto !important;
-        }
-        table table table {
-            table-layout: auto;
-        }
-        a {
-            text-decoration: none;
-        }
-        img {
-            -ms-interpolation-mode:bicubic;
-        }</style>
-        </head>
-
-<body width="100%" style="margin: 0; padding: 0 !important; mso-line-height-rule: exactly; background-color: #f5f6fa;">
-	<center style="width: 100%; background-color: #f5f6fa;">
-        <table width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#f5f6fa">
-            <tr>
-               <td style="padding: 40px 0;">
-                    <table style="width:100%;max-width:620px;margin:0 auto;">
-                        <tbody>
-                            <tr>
-                                <td style="text-align: center; padding-bottom:25px">
-                                    <a href="https://' . $this->siteDomain . '/"><img style="height: 40px" src="https://' . $this->siteDomain . '/img/like-logo.png" alt="logo"></a>
-                                    <p style="font-size: 14px; color: #6576ff; padding-top: 12px;">Refer, Share and Earn</p>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <table style="width:100%;max-width:620px;margin:0 auto;background-color:#ffffff;">
-                        <tbody>
-                            <tr>
-                                <td style="text-align:center;padding: 30px 30px 15px 30px;">
-                                    <h2 style="font-size: 18px; color: #6576ff; font-weight: 600; margin: 0;">Reset Password</h2>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="text-align:center;padding: 0 30px 20px">
-                                    <p style="margin-bottom: 10px;">Hi ' . $name . ',</p>
-                                    <p style="margin-bottom: 25px;">Click On The link blow to reset tour password.</p>
-                                    <a href="https://' . $this->siteDomain . '/fogetpassword/recover.php?id=' . $email . '&ip=' . $password . '&it=' . $resetpassword_id . '" style="background-color:#6576ff;border-radius:4px;color:#ffffff;display:inline-block;font-size:13px;font-weight:600;line-height:44px;text-align:center;text-decoration:none;text-transform: uppercase; padding: 0 25px">Reset Password</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="text-align:center;padding: 20px 30px 40px">
-                                    <p>If you did not make this request, please contact us or ignore this message.</p>
-                                    <p style="margin: 0; font-size: 13px; line-height: 22px; color:#9ea8bb;">This is an automatically generated email please do not reply to this email. If you face any issues, please contact us at  support@' . $this->siteDomain . '</p>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <table style="width:100%;max-width:620px;margin:0 auto;">
-                        <tbody>
-                            <tr>
-                                <td style="text-align: center; padding:25px 20px 0;">
-                                    <p style="font-size: 13px;">Copyright © ' . $d . ' ' . $this->siteName . '. All rights reserved.</p>
-                                    <ul style="margin: 10px -4px 0;padding: 0;">
-                                        <li style="display: inline-block; list-style: none; padding: 4px;"><a style="display: inline-block; height: 30px; width:30px;border-radius: 50%; background-color: #ffffff" href="https://facebook.com/"><img style="width: 30px" src="https://' . $this->siteDomain . '/mail_images/brand-b.png" alt="brand"></a></li>
-                                        <li style="display: inline-block; list-style: none; padding: 4px;"><a style="display: inline-block; height: 30px; width:30px;border-radius: 50%; background-color: #ffffff" href="https://twitter.com/"><img style="width: 30px" src="https://' . $this->siteDomain . '/mail_images/brand-e.png" alt="brand"></a></li>
-                                        <li style="display: inline-block; list-style: none; padding: 4px;"><a style="display: inline-block; height: 30px; width:30px;border-radius: 50%; background-color: #ffffff" href="https://youtube.com/"><img style="width: 30px" src="https://' . $this->siteDomain . '/mail_images/brand-d.png" alt="brand"></a></li>
-                                    </ul>
-                                    <p style="padding-top: 15px; font-size: 12px;">For more detail contact us: info@' . $this->siteDomain . ', support@' . $this->siteDomain . '</p><p style="padding-top: 15px; font-size: 12px;">This email was sent to you as a registered user of <a style="color: #6576ff; text-decoration:none;" href="https://' . $this->siteDomain . '/">' . $this->siteName . '</a>.</p>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-               </td>
-            </tr>
-        </table>
-    </center>
-</body>
-</html>';
-            $header = "MIME-Version: 1.0" . "\r\n";
-            $header .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-            $header .= 'From: ' . $this->siteName . ' <support@' . $this->siteDomain . '>' . "\r\n";
-            $retval = @mail($to, $subject, $content, $header);
-            if ($retval) {
-                return  'Mail sent successfully. Check your Mail for Activation Link';
-            } else {
-                return  'Internal error. Mail fail to send';
-            }
-        } else {
-            return 'Invalid Email. Please ensure you typed it correctly';
-        }
     }
 }
 $email_call = new email();

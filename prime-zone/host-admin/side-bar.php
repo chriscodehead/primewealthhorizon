@@ -2,7 +2,7 @@
  <div>
   <div class="logo-wrapper logo-wrapper-center">
    <a href="./" data-bs-original-title="" title="">
-    <img class="img-fluid for-white" src="../../img/logo1.png" alt="logo">
+    <img class="img-fluid for-white" src="../../img/logo-white.png" alt="logo">
    </a>
    <div class="back-btn">
     <i class="fa fa-angle-left"></i>
@@ -13,7 +13,7 @@
   </div>
   <div class="logo-icon-wrapper">
    <a href="./">
-    <img class="img-fluid main-logo" src="../../img/logo1.png" alt="logo">
+    <img class="img-fluid main-logo" src="../../img/logo-white.png" alt="logo">
    </a>
   </div>
 

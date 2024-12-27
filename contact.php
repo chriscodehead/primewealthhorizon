@@ -198,7 +198,7 @@ require_once('head.php'); ?>
               <input
                 type="text"
                 name="name"
-                id="fullname"
+                id="name"
                 class="csame"
                 placeholder="Write your name here..." />
             </div>
@@ -210,7 +210,7 @@ require_once('head.php'); ?>
               <input
                 type="tel"
                 name="phone"
-                id="YourPhone"
+                id="phone"
                 class="csame"
                 placeholder="Write your phone number here..." />
             </div>
@@ -219,7 +219,7 @@ require_once('head.php'); ?>
               <input
                 type="email"
                 name="email"
-                id="emailInput"
+                id="email"
                 class="csame"
                 placeholder="Write your email here..."
                 required />
@@ -260,7 +260,7 @@ require_once('head.php'); ?>
             </div>
           </div>
           <div class="ak-height-40 ak-height-lg-40"></div>
-          <button type="submit" name="sub" class="common-btn border-0">
+          <button type="button" id="n" onClick="contatMail();" class="common-btn border-0">
             <span>Send Message</span>
             <span>
               <svg
@@ -303,6 +303,45 @@ require_once('head.php'); ?>
   </div>
 
   <?php require_once('footer.php'); ?>
+  <script>
+    function contatMail() {
+      var hr = new XMLHttpRequest();
+      var url = "reg_process.php";
+      var email = document.getElementById('email').value;
+      var name = document.getElementById('name').value;
+      var phone = document.getElementById('phone').value;
+      var message = document.getElementById('message').value;
+      var country = document.getElementById('country').value;
+      var state = document.getElementById('state').value;
+      var vars = "email=" + email + "&name=" + name + "&message=" + message + "&phone=" + phone + "&country=" + country + "&state=" + state;
+
+      if (email == "" || name == "" || message == "" || phone == "" || country == "" || state == "") {
+        sweetUnpre("Please fill all necessary fields!");
+      } else {
+        var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+        if (!emailReg.test(email)) {
+          sweetUnpre('Please use a valid email address!');
+        } else {
+          hr.open("POST", url, true);
+          hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+          hr.onreadystatechange = function() {
+            if (hr.readyState == 4 && hr.status == 200) {
+              var return_data = hr.responseText;
+              sweetUnpre(return_data);
+              document.getElementById('email').value = "";
+              document.getElementById('name').value = "";
+              document.getElementById('phone').value = "";
+              document.getElementById('message').value = "";
+              document.getElementById('country').value = "";
+              document.getElementById('state').value = "";
+            }
+          }
+          hr.send(vars);
+        }
+        sweetUnpre('processing...');
+      }
+    }
+  </script>
 </body>
 
 </html>

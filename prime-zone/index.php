@@ -35,7 +35,7 @@ if (isset($_POST['sub'])) {
         <div class="col-xl-5 col-lg-6 me-auto">
           <div class="log-in-box">
             <div class="log-in-title">
-              <center><a href="./"><img style="width: 100px;" src="../img/logo.png" class="img-fluid" alt="" /></a></center><br />
+              <center><a href="./"><img style="width: 200px;" src="../img/logo.png" class="img-fluid" alt="" /></a></center><br />
               <h3>Access Admin Account</h3>
             </div>
 

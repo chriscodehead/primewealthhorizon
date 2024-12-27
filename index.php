@@ -101,12 +101,12 @@ require_once('head.php'); ?>
                   </h1>
                   <p class="main-desp">
                     Empowering Your Financial Future Expert Guidance from
-                    Trusted Advisors. Lorem ipsum is simply dummy text.
+                    Trusted Advisors.
                   </p>
                 </div>
                 <div class="ak-height-50 ak-height-lg-40"></div>
                 <div>
-                  <a href="about.html" class="common-btn style-2">
+                  <a href="about" class="common-btn style-2">
                     <span>Free Consultation</span>
                     <span class="arrow-cricle">
                       <svg
@@ -290,7 +290,6 @@ require_once('head.php'); ?>
     </div>
   </section>
 
-
   <div class="ak-height-125 ak-height-lg-80"></div>
   <section>
     <div class="container">
@@ -314,7 +313,7 @@ require_once('head.php'); ?>
             <div class="feature-body">
               <h5 class="feature-title">Join as a Marketing Affiliate</h5>
               <p>Partner with us to earn commissions by promoting our premium products.</p>
-              <a href="prime-affiliate/register" class="more-btn">
+              <a href="accounts/" class="more-btn">
                 <span>Become An Affiliate</span>
                 <span class="svg-icon">
                   <svg

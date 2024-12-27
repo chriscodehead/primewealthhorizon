@@ -99,33 +99,21 @@ $bassic->checkLogedINAdmin('login'); ?>
                                                     <div class="swiper categories-slider categories-style">
                                                         <div class="swiper-wrapper">
 
-                                                            <div class="swiper-slide">
-                                                                <a href="category.html" class="food-categories">
-                                                                    <img class="img-fluid categories-img" src="assets/images/product/1.png" alt="p-1">
-                                                                    <h4 class="dark-text">Pizza</h4>
-                                                                </a>
-                                                            </div>
+                                                            <?php $sql = query_sql("SELECT * FROM $category_tb  ORDER BY id DESC LIMIT 10");
+                                                            if (mysqli_num_rows($sql) > 0) {
+                                                                $c = 0;
+                                                                while ($row = mysqli_fetch_assoc($sql)) { ?>
 
-                                                            <div class="swiper-slide">
-                                                                <a href="category.html" class="food-categories">
-                                                                    <img class="img-fluid categories-img" src="assets/images/product/2.png" alt="p-2">
-                                                                    <h4 class="dark-text">Chicken</h4>
-                                                                </a>
-                                                            </div>
+                                                                    <div class="swiper-slide">
+                                                                        <a href="category" class="food-categories">
+                                                                            <img class="img-fluid categories-img" src="../../photo/<?php print $row['category_image']; ?>" alt="p-1">
+                                                                            <h4 class="dark-text"><?php print $row['category_name']; ?></h4>
+                                                                        </a>
+                                                                    </div>
 
-                                                            <div class="swiper-slide">
-                                                                <a href="category.html" class="food-categories">
-                                                                    <img class="img-fluid categories-img" src="assets/images/product/3.png" alt="p-3">
-                                                                    <h4 class="dark-text">Burger</h4>
-                                                                </a>
-                                                            </div>
-
-                                                            <div class="swiper-slide">
-                                                                <a href="category.html" class="food-categories">
-                                                                    <img class="img-fluid categories-img" src="assets/images/product/4.png" alt="p-5">
-                                                                    <h4 class="dark-text">Fries</h4>
-                                                                </a>
-                                                            </div>
+                                                            <?php $c++;
+                                                                }
+                                                            } ?>
 
                                                         </div>
                                                     </div>
@@ -151,470 +139,93 @@ $bassic->checkLogedINAdmin('login'); ?>
                                             <table class="table user-table" id="table_id">
                                                 <thead>
                                                     <tr>
-                                                        <th><input id="checkall​" class="custom-checkbox" type="checkbox" name="text"></th>
-                                                        <th>Food</th>
-                                                        <th>Customer</th>
-                                                        <th>Order Date</th>
-                                                        <th>Price</th>
-                                                        <th>Status</th>
+                                                        <th>Order Image</th>
+                                                        <th>Order Id</th>
+                                                        <th>User</th>
+                                                        <th>Quantity</th>
+                                                        <th>Amount</th>
+                                                        <th>Payment Method</th>
+                                                        <th>Payment Status</th>
+                                                        <th>Delivery Status</th>
+                                                        <th>Date</th>
+                                                        <th>Tracking</th>
                                                     </tr>
                                                 </thead>
 
                                                 <tbody>
-                                                    <tr>
-                                                        <td>
-                                                            <input class="custom-checkbox" type="checkbox" name="text">
-                                                        </td>
+                                                    <?php $sql = query_sql("SELECT * FROM $orders WHERE `delete_status`='no' ORDER BY id DESC LIMIT 10");
+                                                    if (mysqli_num_rows($sql) > 0) {
+                                                        $c = 0;
+                                                        while ($row = mysqli_fetch_assoc($sql)) { ?>
+                                                            <tr data-bs-toggle="offcanvas">
+                                                                <td>
+                                                                    <a class="d-block">
+                                                                        <span class="order-image">
+                                                                            <img src="../../photo/<?php print $sqli->getProductTable($row['product_id'], 'product_thumbnail'); ?>"
+                                                                                class="img-fluid" alt="IMG">
+                                                                        </span>
+                                                                    </a>
+                                                                </td>
 
-                                                        <td>
-                                                            <div class="table-image">
-                                                                <img src="assets/images/dashboard/product-2/1.jpg" class="img-fluid"
-                                                                    alt="">
-                                                                <h5>Fish Burger</h5>
-                                                            </div>
-                                                        </td>
-                                                        <td>Jessica Taylor</td>
-                                                        <td> 25/10/2024 </td>
+                                                                <td><?php print $row['order_id']; ?></td>
 
-                                                        <td>$30.00</td>
+                                                                <td><?php print @$sqli->getUserTable($row['user_id'], 'email'); ?></td>
 
-                                                        <td>
-                                                            <div class="pending">pending</div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <input class="custom-checkbox" type="checkbox" name="text">
-                                                        </td>
+                                                                <td><?php print $row['order_qauntity']; ?></td>
 
-                                                        <td>
-                                                            <div class="table-image">
-                                                                <img src="assets/images/dashboard/product-2/2.jpg" class="img-fluid"
-                                                                    alt="">
-                                                                <h5>Pepperoni Pizza</h5>
-                                                            </div>
-                                                        </td>
-                                                        <td>Jane Cooper</td>
-                                                        <td> 20/1/2024 </td>
+                                                                <td><?php print $row['order_price']; ?></td>
 
-                                                        <td>$57.20</td>
+                                                                <td><button class="btn btn-sm btn-primary text-dark"><?php print $row['order_payment_method']; ?></button></td>
 
-                                                        <td>
-                                                            <div class="completed">completed</div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <input class="custom-checkbox" type="checkbox" name="text">
-                                                        </td>
+                                                                <td><?php if ($row['order_payment_status'] == 'yes') {
+                                                                        print '<button  class="btn btn-sm btn-warning text-dark" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#paymentApprove' . $row['order_id'] . '">Approved</button>';
+                                                                    } else {
+                                                                        print '<button class="btn btn-sm btn-primary text-dark" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#paymentPending' . $row['order_id'] . '">Pending</button>';
+                                                                    } ?>
+                                                                </td>
 
-                                                        <td>
-                                                            <div class="table-image">
-                                                                <img src="assets/images/dashboard/product-2/3.jpg" class="img-fluid"
-                                                                    alt="">
-                                                                <h5>Hot Dog</h5>
-                                                            </div>
-                                                        </td>
-                                                        <td>Olivia Anderson</td>
-                                                        <td> 18/10/2024 </td>
 
-                                                        <td>$40.00</td>
+                                                                <td><?php if ($row['delivery_status'] == 'yes') {
+                                                                        print '<button  class="btn btn-sm btn-warning text-dark" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#deliveryApprove' . $row['order_id'] . '">Delivered</button>';
+                                                                    } else {
+                                                                        print '<button class="btn btn-sm btn-primary text-dark" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#deliveryPending' . $row['order_id'] . '">Processing</button>';
+                                                                    } ?>
+                                                                </td>
 
-                                                        <td>
-                                                            <div class="pending">pending</div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <input class="custom-checkbox" type="checkbox" name="text">
-                                                        </td>
 
-                                                        <td>
-                                                            <div class="table-image">
-                                                                <img src="assets/images/dashboard/product-2/4.jpg" class="img-fluid"
-                                                                    alt="">
-                                                                <h5>Nachos</h5>
-                                                            </div>
-                                                        </td>
-                                                        <td>Sophia Garcia</td>
-                                                        <td> 02/08/2024 </td>
+                                                                <td><?php print $row['date_created']; ?></td>
 
-                                                        <td>$30.25</td>
 
-                                                        <td>
-                                                            <div class="completed">completed</div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <input class="custom-checkbox" type="checkbox" name="text">
-                                                        </td>
+                                                                <td>
+                                                                    <a class="btn btn-sm btn-dashed text-white"
+                                                                        href="order-tracking?orderId=<?php print $row['order_id'] ?>">
+                                                                        Tracking
+                                                                    </a>
+                                                                </td>
+                                                            </tr>
 
-                                                        <td>
-                                                            <div class="table-image">
-                                                                <img src="assets/images/dashboard/product-2/5.jpg" class="img-fluid"
-                                                                    alt="">
-                                                                <h5>Beef Burger</h5>
-                                                            </div>
-                                                        </td>
-                                                        <td>Michael Smith</td>
-                                                        <td> 05/05/2024 </td>
+                                                        <?php $c++;
+                                                        }
+                                                    } else { ?>
+                                                        <tr>
+                                                            <td colspan="12">
+                                                                <h3>No data found!</h3>
+                                                            </td>
+                                                        </tr>
 
-                                                        <td>$50.00</td>
-                                                        <td>
-                                                            <div class="pending">pending</div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <input class="custom-checkbox" type="checkbox" name="text">
-                                                        </td>
+                                                    <?php } ?>
 
-                                                        <td>
-                                                            <div class="table-image">
-                                                                <img src="assets/images/dashboard/product-2/6.jpg" class="img-fluid"
-                                                                    alt="">
-                                                                <h5>Japanese Ramen</h5>
-                                                            </div>
-                                                        </td>
-                                                        <td>David Wilson</td>
-                                                        <td> 26/07/2024 </td>
-
-                                                        <td>$71.010</td>
-
-                                                        <td>
-                                                            <div class="completed">completed</div>
-                                                        </td>
-                                                    </tr>
                                                 </tbody>
                                             </table>
+
+
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="col-12">
-                            <div class="trending-orders">
-                                <div class="trnding-title">
-                                    <h5>Trending orders</h5>
-                                    <a href="media.html">View All
-                                        <i class="ri-arrow-right-s-line"></i>
-                                    </a>
-                                </div>
-                                <div class="swiper trending-slider">
-                                    <div class="swiper-wrapper">
-                                        <div class="swiper-slide trending-box">
-                                            <div class="card-body trending-items">
-                                                <img class="img-fluid product-img" src="assets/images/dashboard/product/1.jpg" alt="">
-                                                <div class="d-flex align-items-center justify-content-between">
-                                                    <h5>Poultry Palace</h5>
-                                                    <h6>$20.00</h6>
-                                                </div>
-                                                <p>Healthy Foods are nutrient-Dense Foods</p>
-                                                <ul class="rating">
-                                                    <li>
-                                                        <h6>200
-                                                            <span>Sale</span>
-                                                        </h6>
-                                                    </li>
-                                                    <li>
-                                                        <p>
-                                                            <i class="ri-star-fill"></i>
-                                                            4.5
-                                                        </p>
-                                                    </li>
-                                                </ul>
-                                                <div class="marquee-box">
-                                                    <ul class="marquee-discount">
-                                                        <li class="discount-info">
-                                                            <img src="assets/images/dashboard/round.gif" alt="">
-                                                            Top Of Them Month
-                                                        </li>
-                                                        <li class="discount-info">
-                                                            <img src="assets/images/dashboard/round.gif" alt="">
-                                                            Top Of Them Month
-                                                        </li>
-                                                        <li class="discount-info">
-                                                            <img src="assets/images/dashboard/round.gif" alt="">
-                                                            Top Of Them Month
-                                                        </li>
-                                                        <li class="discount-info">
-                                                            <img src="assets/images/dashboard/round.gif" alt="">
-                                                            Top Of Them Month
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
 
-                                        </div>
-                                        <div class="swiper-slide trending-box">
-                                            <div class="card-body trending-items">
-                                                <img class="img-fluid product-img" src="assets/images/dashboard/product/2.jpg" alt="">
-                                                <div class="d-flex align-items-center justify-content-between">
-                                                    <h5>Wing Mastern</h5>
-                                                    <h6>$30.00</h6>
-                                                </div>
-                                                <p>Nutrient-dense with healthy choices</p>
-                                                <ul class="rating">
-                                                    <li>
-                                                        <h6>200
-                                                            <span>Sale</span>
-                                                        </h6>
-                                                    </li>
-                                                    <li>
-                                                        <p>
-                                                            <i class="ri-star-fill"></i>
-                                                            4.5
-                                                        </p>
-                                                    </li>
-                                                </ul>
-                                                <div class="marquee-box">
-                                                    <ul class="marquee-discount">
-                                                        <li class="discount-info">
-                                                            <img src="assets/images/dashboard/round.gif" alt="">
-                                                            Top Of Them Week
-                                                        </li>
-                                                        <li class="discount-info">
-                                                            <img src="assets/images/dashboard/round.gif" alt="">
-                                                            Top Of Them Week
-                                                        </li>
-                                                        <li class="discount-info">
-                                                            <img src="assets/images/dashboard/round.gif" alt="">
-                                                            Top Of Them Week
-                                                        </li>
-                                                        <li class="discount-info">
-                                                            <img src="assets/images/dashboard/round.gif" alt="">
-                                                            Top Of Them Week
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <div class="swiper-slide trending-box">
-                                            <div class="card-body trending-items">
-                                                <img class="img-fluid product-img" src="assets/images/dashboard/product/3.jpg" alt="">
-                                                <div class="d-flex align-items-center justify-content-between">
-                                                    <h5>Burger Barn</h5>
-                                                    <h6>$20.00</h6>
-                                                </div>
-                                                <p>offering numerous health benefits prevention.</p>
-                                                <ul class="rating">
-                                                    <li>
-                                                        <h6>200
-                                                            <span>Sale</span>
-                                                        </h6>
-                                                    </li>
-                                                    <li>
-                                                        <p>
-                                                            <i class="ri-star-fill"></i>
-                                                            4.5
-                                                        </p>
-                                                    </li>
-                                                </ul>
-                                                <div class="marquee-box">
-                                                    <ul class="marquee-discount">
-                                                        <li class="discount-info">
-                                                            <img src="assets/images/dashboard/round.gif" alt="">
-                                                            Top Of Them Year
-                                                        </li>
-                                                        <li class="discount-info">
-                                                            <img src="assets/images/dashboard/round.gif" alt="">
-                                                            Top Of Them Year
-                                                        </li>
-                                                        <li class="discount-info">
-                                                            <img src="assets/images/dashboard/round.gif" alt="">
-                                                            Top Of Them Year
-                                                        </li>
-                                                        <li class="discount-info">
-                                                            <img src="assets/images/dashboard/round.gif" alt="">
-                                                            Top Of Them Year
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <div class="swiper-slide trending-box">
-                                            <div class="card-body trending-items">
-                                                <img class="img-fluid product-img" src="assets/images/dashboard/product/4.jpg" alt="">
-                                                <div class="d-flex align-items-center justify-content-between">
-                                                    <h5>Poultry Palace</h5>
-                                                    <h6>$15.00</h6>
-                                                </div>
-                                                <p>Healthy Foods are nutrient-Dense Foods</p>
-                                                <ul class="rating">
-                                                    <li>
-                                                        <h6>200
-                                                            <span>Sale</span>
-                                                        </h6>
-                                                    </li>
-                                                    <li>
-                                                        <p>
-                                                            <i class="ri-star-fill"></i>
-                                                            4.5
-                                                        </p>
-                                                    </li>
-                                                </ul>
-                                                <div class="marquee-box">
-                                                    <ul class="marquee-discount">
-                                                        <li class="discount-info">
-                                                            <img src="assets/images/dashboard/round.gif" alt="">
-                                                            Top Of Them Year
-                                                        </li>
-                                                        <li class="discount-info">
-                                                            <img src="assets/images/dashboard/round.gif" alt="">
-                                                            Top Of Them Year
-                                                        </li>
-                                                        <li class="discount-info">
-                                                            <img src="assets/images/dashboard/round.gif" alt="">
-                                                            Top Of Them Year
-                                                        </li>
-                                                        <li class="discount-info">
-                                                            <img src="assets/images/dashboard/round.gif" alt="">
-                                                            Top Of Them Year
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <div class="swiper-slide trending-box">
-                                            <div class="card-body trending-items">
-                                                <img class="img-fluid product-img" src="assets/images/dashboard/product/5.jpg" alt="">
-                                                <div class="d-flex align-items-center justify-content-between">
-                                                    <h5>Mushroom</h5>
-                                                    <h6>$20.00</h6>
-                                                </div>
-                                                <p>Eggs are a nutrient powerhouse overall health.</p>
-                                                <ul class="rating">
-                                                    <li>
-                                                        <h6>200
-                                                            <span>Sale</span>
-                                                        </h6>
-                                                    </li>
-                                                    <li>
-                                                        <p>
-                                                            <i class="ri-star-fill"></i>
-                                                            4.5
-                                                        </p>
-                                                    </li>
-                                                </ul>
-                                                <div class="marquee-box">
-                                                    <ul class="marquee-discount">
-                                                        <li class="discount-info">
-                                                            <img src="assets/images/dashboard/round.gif" alt="">
-                                                            Top Of Them Week
-                                                        </li>
-                                                        <li class="discount-info">
-                                                            <img src="assets/images/dashboard/round.gif" alt="">
-                                                            Top Of Them Week
-                                                        </li>
-                                                        <li class="discount-info">
-                                                            <img src="assets/images/dashboard/round.gif" alt="">
-                                                            Top Of Them Week
-                                                        </li>
-                                                        <li class="discount-info">
-                                                            <img src="assets/images/dashboard/round.gif" alt="">
-                                                            Top Of Them Week
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <div class="swiper-slide trending-box">
-                                            <div class="card-body trending-items">
-                                                <img class="img-fluid product-img" src="assets/images/dashboard/product/6.jpg" alt="">
-                                                <div class="d-flex align-items-center justify-content-between">
-                                                    <h5>Ribeye Junction</h5>
-                                                    <h6>$20.00</h6>
-                                                </div>
-                                                <p>Healthy Foods are nutrient-Dense Foods</p>
-                                                <ul class="rating">
-                                                    <li>
-                                                        <h6>200
-                                                            <span>Sale</span>
-                                                        </h6>
-                                                    </li>
-                                                    <li>
-                                                        <p>
-                                                            <i class="ri-star-fill"></i>
-                                                            4.5
-                                                        </p>
-                                                    </li>
-                                                </ul>
-                                                <div class="marquee-box">
-                                                    <ul class="marquee-discount">
-                                                        <li class="discount-info">
-                                                            <img src="assets/images/dashboard/round.gif" alt="">
-                                                            Top Of Them Month
-                                                        </li>
-                                                        <li class="discount-info">
-                                                            <img src="assets/images/dashboard/round.gif" alt="">
-                                                            Top Of Them Month
-                                                        </li>
-                                                        <li class="discount-info">
-                                                            <img src="assets/images/dashboard/round.gif" alt="">
-                                                            Top Of Them Month
-                                                        </li>
-                                                        <li class="discount-info">
-                                                            <img src="assets/images/dashboard/round.gif" alt="">
-                                                            Top Of Them Month
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <div class="swiper-slide trending-box">
-                                            <div class="card-body trending-items">
-                                                <img class="img-fluid product-img" src="assets/images/dashboard/product/7.jpg" alt="">
-                                                <div class="d-flex align-items-center justify-content-between">
-                                                    <h5>Latte Lounge</h5>
-                                                    <h6>$20.00</h6>
-                                                </div>
-                                                <p>Healthy Foods are nutrient-Dense Foods</p>
-                                                <ul class="rating">
-                                                    <li>
-                                                        <h6>200
-                                                            <span>Sale</span>
-                                                        </h6>
-                                                    </li>
-                                                    <li>
-                                                        <p>
-                                                            <i class="ri-star-fill"></i>
-                                                            4.5
-                                                        </p>
-                                                    </li>
-                                                </ul>
-                                                <div class="marquee-box">
-                                                    <ul class="marquee-discount">
-                                                        <li class="discount-info">
-                                                            <img src="assets/images/dashboard/round.gif" alt="">
-                                                            Top Of Them Week
-                                                        </li>
-                                                        <li class="discount-info">
-                                                            <img src="assets/images/dashboard/round.gif" alt="">
-                                                            Top Of Them Week
-                                                        </li>
-                                                        <li class="discount-info">
-                                                            <img src="assets/images/dashboard/round.gif" alt="">
-                                                            Top Of Them Week
-                                                        </li>
-                                                        <li class="discount-info">
-                                                            <img src="assets/images/dashboard/round.gif" alt="">
-                                                            Top Of Them Week
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
 
