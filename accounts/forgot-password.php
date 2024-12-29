@@ -37,6 +37,11 @@ if (isset($_POST['emailfgt'])) {
                                 <div class="col-12">
                                     <div class="alart alert-warning"><?php echo @$msg; ?></div>
                                 </div>
+
+                                <div class="col-12">
+                                    <div class="alart alert-warning"><?php echo @$msg; ?></div>
+                                </div>
+
                                 <div class="col-12">
                                     <label class="col-form-label pt-0">Enter Your Recovery Email</label>
                                     <input type="email" name="emailfgt" id="emailfgt" placeholder="Enter Email">
@@ -46,6 +51,7 @@ if (isset($_POST['emailfgt'])) {
                                     <button class="btn btn-animation w-100 justify-content-center" name="emailfgt"
                                         type="button" onClick="passFoget();">Recover Account</button>
                                 </div>
+
                             </form>
                         </div>
 

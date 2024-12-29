@@ -349,31 +349,31 @@ class Cal extends DBConnection
             } else { //Blocked account error massage
 
                 if ($row['email'] == $email && $row['password'] == $password) {
-                    if ($row['email_activation'] == "yes") {
-                        if ($row['two_factor'] == "Yes") {
-                            self::twoFac($row['email'], $row['two_factor_code'], $row['first_name']);
-                            $_SESSION['inc'] = $row['hashed_pot'];
+                    //if ($row['email_activation'] == "yes") {
+                    if ($row['two_factor'] == "Yes") {
+                        self::twoFac($row['email'], $row['two_factor_code'], $row['first_name']);
+                        $_SESSION['inc'] = $row['hashed_pot'];
 
-                            $last_login = date("Y-m-d h:i:s");
-                            $feilds = array('last_login');
-                            $value = array($last_login);
-                            self::update($this->user_tb, $feilds, $value, 'email', $email);
+                        $last_login = date("Y-m-d h:i:s");
+                        $feilds = array('last_login');
+                        $value = array($last_login);
+                        self::update($this->user_tb, $feilds, $value, 'email', $email);
 
-                            header("location:confirm-code");
-                        } else {
-                            $_SESSION['user_code'] = $row['hashed_pot'];
-                            $_SESSION['logged_in'] = time();
-
-                            $last_login = date("Y-m-d h:i:s");
-                            $feilds = array('last_login');
-                            $value = array($last_login);
-                            self::update($this->user_tb, $feilds, $value, 'email', $email);
-                            header("location:" . $page);
-                            return 'go';
-                        }
+                        header("location:confirm-code");
                     } else {
-                        return "Sorry you can not access your account because your email has not been activated. I have not received any email <button onclick=resendEmailActivation('$email'); name=sendmailac class='btn btn-theme' type=button>Resend Activation Email?</button> OR Check your spam<br />";
+                        $_SESSION['user_code'] = $row['hashed_pot'];
+                        $_SESSION['logged_in'] = time();
+
+                        $last_login = date("Y-m-d h:i:s");
+                        $feilds = array('last_login');
+                        $value = array($last_login);
+                        self::update($this->user_tb, $feilds, $value, 'email', $email);
+                        header("location:" . $page);
+                        return 'go';
                     }
+                    //} else {
+                    //return "Sorry you can not access your account because your email has not been activated. I have not received any email <button onclick=resendEmailActivation('$email'); name=sendmailac class='btn btn-theme' type=button>Resend Activation Email?</button> OR Check your spam<br />";
+                    //}
                 } else {
                     return 'Invalid email / password combination!';
                 }

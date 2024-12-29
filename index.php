@@ -77,135 +77,6 @@ require_once('head.php'); ?>
         </div>
       </div>
 
-      <div class="swiper-slide">
-        <div
-          class="ak-hero ak-style1 slide-inner"
-          data-swiper-parallax="100%">
-          <div class="ak-hero-featured" data-src="assets/img/hero/hero_1.png">
-            <img
-              src="assets/img/hero/hero_2.png"
-              class="ak-hero-bg"
-              alt="..." />
-          </div>
-          <div class="container-md">
-            <div class="hero-slider-info">
-              <div class="slider-info">
-                <div class="hero-title">
-                  <p class="mini-title">
-                    Welcome to Your Trusted Financial Partner!
-                  </p>
-                  <h1 class="hero-main-title">
-                    Expert Guidance from
-                    <span class="hero-main-title-1 style-2">
-                      Our Trusted Advisors</span>
-                  </h1>
-                  <p class="main-desp">
-                    Empowering Your Financial Future Expert Guidance from
-                    Trusted Advisors.
-                  </p>
-                </div>
-                <div class="ak-height-50 ak-height-lg-40"></div>
-                <div>
-                  <a href="about" class="common-btn style-2">
-                    <span>Free Consultation</span>
-                    <span class="arrow-cricle">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="10"
-                        height="10"
-                        viewBox="0 0 10 10"
-                        fill="none">
-                        <path
-                          d="M0.828613 5H9.16195M9.16195 5L5.16195 1M9.16195 5L5.16195 9"
-                          stroke="#030917"
-                          stroke-linecap="round"
-                          stroke-linejoin="round" />
-                      </svg>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="10"
-                        height="10"
-                        viewBox="0 0 10 10"
-                        fill="none">
-                        <path
-                          d="M0.828613 5H9.16195M9.16195 5L5.16195 1M9.16195 5L5.16195 9"
-                          stroke="#030917"
-                          stroke-linecap="round"
-                          stroke-linejoin="round" />
-                      </svg>
-                    </span>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="swiper-slide">
-        <div
-          class="ak-hero ak-style1 slide-inner"
-          data-swiper-parallax="100%">
-          <div class="ak-hero-featured" data-src="assets/img/hero/hero_1.png">
-            <img
-              src="assets/img/hero/hero_3.png"
-              class="ak-hero-bg"
-              alt="..." />
-          </div>
-          <div class="container-md">
-            <div class="hero-slider-info">
-              <div class="slider-info">
-                <div class="hero-title">
-                  <p class="mini-title">
-                    Welcome to Your Trusted Financial Partner!
-                  </p>
-                  <h1 class="hero-main-title">
-                    Expert Guidance from
-                    <span class="hero-main-title-1 style-2">
-                      Our Trusted Advisors</span>
-                  </h1>
-                  <p class="main-desp">
-                    <?php print $siteName; ?> Empowering Your Financial Future. Discover innovative consulting solutions tailored to help your business thrive in a competitive world.
-                  </p>
-                </div>
-                <div class="ak-height-50 ak-height-lg-40"></div>
-                <div>
-                  <a href="contact" class="common-btn style-2">
-                    <span>Free Consultation</span>
-                    <span class="arrow-cricle">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="10"
-                        height="10"
-                        viewBox="0 0 10 10"
-                        fill="none">
-                        <path
-                          d="M0.828613 5H9.16195M9.16195 5L5.16195 1M9.16195 5L5.16195 9"
-                          stroke="#030917"
-                          stroke-linecap="round"
-                          stroke-linejoin="round" />
-                      </svg>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="10"
-                        height="10"
-                        viewBox="0 0 10 10"
-                        fill="none">
-                        <path
-                          d="M0.828613 5H9.16195M9.16195 5L5.16195 1M9.16195 5L5.16195 9"
-                          stroke="#030917"
-                          stroke-linecap="round"
-                          stroke-linejoin="round" />
-                      </svg>
-                    </span>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
     </div>
 
     <div class="social-hero">
@@ -584,8 +455,12 @@ require_once('head.php'); ?>
 
   <div class="ak-height-125 ak-height-lg-80"></div>
   <section class="container">
+    <div class="img-clip-text" data-src="assets/img/bg/img-clip-text-bg.jpg">
+      Why <br />
+      Join Us?
+    </div>
+    <div class="ak-height-50 ak-height-lg-30"></div>
     <div class="feature-content">
-
       <div class="feature-card">
         <img class="feature-icon" src="assets/img/icon/light.svg" alt="..." />
         <div class="feature-body">

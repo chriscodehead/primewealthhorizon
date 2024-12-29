@@ -44,7 +44,7 @@ $title = $siteName . ' - Signin'; ?>
             <div class="input-box">
               <form enctype="multipart/form-data" method="post" class="row g-3">
                 <div class="col-12">
-                  <div class="alart alert-warning" style="padding: 5px;"><?php echo @$msg; ?></div>
+                  <div class="alart alert-warning"><?php echo @$msg; ?></div>
                 </div>
 
                 <div class="col-12">

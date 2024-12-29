@@ -41,6 +41,17 @@
                <li class="">
                  <a href="services">Services</a>
                </li>
+               <li class="menu-item-has-children">
+                 <a href="store">Store</a>
+                 <ul>
+                   <li>
+                     <a href="store">Store</a>
+                   </li>
+                   <li>
+                     <a href="affiliate">Affiliate</a>
+                   </li>
+                 </ul>
+               </li>
                <li>
                  <a href="contact">Contact</a>
                </li>
@@ -49,7 +60,7 @@
          </div>
 
          <div class="ak-main-header-right">
-           <a target="_blank" href="affiliate" class="common-btn">
+           <a href="affiliate" class="common-btn">
              <span> Become An Affiliate</span>
              <span>
                <svg

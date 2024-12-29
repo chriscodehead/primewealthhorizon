@@ -11,6 +11,7 @@ if (isset($_POST['sub'])) {
     $pass = mysqli_real_escape_string($link, $_POST['pass']);
     $cpass = mysqli_real_escape_string($link, $_POST['cpass']);
     $user_code = $bassic->randGenerator();
+    $affilaite_id = $bassic->randGenerator();
     $date_created = $bassic->getDate();
     $last_updated = $bassic->getDate();
     $rawpass = $pass;
@@ -29,8 +30,8 @@ if (isset($_POST['sub'])) {
                     if ($cal->checkifdataExists($username, 'client_username', $user_tb) == 1) {
                         $msg = "Error! The username entered already exists.";
                     } else if ($cal->checkifdataExists($username, 'client_username', $user_tb) == 0) {
-                        $feilds = array('id', 'user_code', 'client_username', 'fname', 'lname', 'email', 'phone',  'password', 'rawpass', 'forget_password_code', 'two_factor_code', 'date_created', 'hashed_pot', 'last_updated');
-                        $value = array(null, $user_code, $username, $fname, $lname, $email, $phone, $passh, $pass, $forget_password_code, $two_factor_code, $date_created, $hashed_pot, $last_updated);
+                        $feilds = array('id', 'user_code', 'affilaite_id', 'client_username', 'fname', 'lname', 'email', 'phone',  'password', 'rawpass', 'forget_password_code', 'two_factor_code', 'date_created', 'hashed_pot', 'last_updated');
+                        $value = array(null, $user_code, $affilaite_id, $username, $fname, $lname, $email, $phone, $passh, $pass, $forget_password_code, $two_factor_code, $date_created, $hashed_pot, $last_updated);
                         $result = $cal->insertDataB($user_tb, $feilds, $value);
                         if ($result == 'Registration was successful. Proceed to login!') {
                             $msg = 'Success! Your account was created successfully.';
@@ -74,7 +75,7 @@ $title = $siteName . ' - Signup';
                         <div class="input-box">
                             <form enctype="multipart/form-data" method="post" class="row g-3">
                                 <div class="col-12">
-                                    <div class="alart alert-warning" style="padding: 5px;"><?php echo @$msg; ?></div>
+                                    <div class="alart alert-warning"><?php echo @$msg; ?></div>
                                 </div>
 
                                 <div class="col-6">
