@@ -59,6 +59,17 @@ class sqli
 		return $row[$selectItem];
 	}
 
+	public function getRow($session, $field)
+	{
+		$sql = "SELECT * FROM $this->user_tb WHERE `email`='" . $session . "'";
+		$stmt = query_sql($sql);
+		$row = mysqli_fetch_assoc($stmt);
+		return $row[$field];
+	}
+
+
+	/////////////////////////////////////////////////////////
+
 	public function getReferrals($user_id)
 	{
 		$referrals = array();
@@ -811,13 +822,6 @@ class sqli
 		return self::round_out($amt, 4);
 	}
 
-	public function getRow($session, $field)
-	{
-		$sql = "SELECT * FROM $this->user_tb WHERE `email`='" . $session . "'";
-		$stmt = query_sql($sql);
-		$row = mysqli_fetch_assoc($stmt);
-		return $row[$field];
-	}
 
 	public function round_out($value, $places = 0)
 	{

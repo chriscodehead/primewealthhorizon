@@ -69,7 +69,7 @@ $bassic->checkLogedINAdmin('login'); ?>
                                                                             alt="">
                                                                     </div>
                                                                 </td>
-                                                                <td><?php print $bassic->reduceTextLength($row['category_name'], 20); ?></td>
+                                                                <td title="<?php print $row['category_name']; ?>"><?php print $bassic->reduceTextLength($row['category_name'], 20); ?></td>
 
                                                                 <td><?php print $row['date_created']; ?></td>
 

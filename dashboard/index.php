@@ -10,9 +10,9 @@ $title = 'User Dashboard'; ?>
         <i class="ri-arrow-up-double-fill"></i>
     </div>
 
-    <div class="loader-wrapper">
+    <!-- <div class="loader-wrapper">
         <img src="assets/images/loader.gif" alt="">
-    </div>
+    </div> -->
 
     <div class="page-wrapper compact-wrapper" id="pageWrapper">
 
@@ -28,12 +28,17 @@ $title = 'User Dashboard'; ?>
                         <div class="col-xxl-12 col-xl-12 col-md-12 col-12">
                             <div class="row">
 
-                                <?php if ($sqli->getRow($sqli->getEmail($_SESSION['user_code']), 'email_activation') == 'no') { ?>
+                                <?php require_once('email-activation-check.php'); ?>
+
+                                <?php if ($sqli->getRow($sqli->getEmail($_SESSION['user_code']), 'approved_for_affiliate') == 'no') { ?>
                                     <div class="col-xxl-12 col-sm-12 ">
                                         <div class="card widgets-card">
                                             <div class="card-body">
                                                 <div class="">
-                                                    Activate your email to have full access to your account.<button onclick="resendEmailActivation('<?php print $sqli->getEmail($_SESSION['user_code']); ?>');" name="sendmailac" class="btn btn-sm btn-danger pull-right" type="button">Resend Activation Email?</button>
+                                                    To become an affiliate, simply purchase one of our Affiliate Starter Packs to unlock eligibility to join our dynamic team. Once verified, you'll be ready to start earning like a pro, joining countless others who are already turning their efforts into real income. Take the first step toward financial success today!
+                                                    <a href="buy-affiliate-pack">
+                                                        <button class="btn btn-sm btn-danger pull-right" type="button">Become An Affiliate</button>
+                                                    </a>
                                                 </div>
                                             </div>
                                         </div>
@@ -47,6 +52,7 @@ $title = 'User Dashboard'; ?>
                                                 <h5>Affiliate Store Link:</h5>
                                                 <?php print $siteUrl; ?><input style="width: 200px;" type="text" value="<?php print $sqli->getRow($sqli->getEmail($_SESSION['user_code']), 'affilaite_url'); ?>" id="storeName" name="storeName" placeholder="Enter store name" oninput="formatInput()"> <i onclick="saveStoreName();" id="updateStoreUrl" class="fa fa-edit text-warning">Save</i>
                                             </div>
+                                            <a style="font-size: 10px;" target="_blank" href="<?php print $siteUrl; ?><?php print $sqli->getRow($sqli->getEmail($_SESSION['user_code']), 'affilaite_url'); ?>"><?php print $siteUrl; ?><?php print $sqli->getRow($sqli->getEmail($_SESSION['user_code']), 'affilaite_url'); ?></a>
                                         </div>
                                     </div>
                                 </div>
@@ -114,6 +120,7 @@ $title = 'User Dashboard'; ?>
                             </div>
                         </div>
 
+
                         <div class="col-xl-12">
                             <div class="card">
                                 <div class="card-header">
@@ -139,7 +146,9 @@ $title = 'User Dashboard'; ?>
                                                 </thead>
 
                                                 <tbody>
-                                                    <?php $sql = query_sql("SELECT * FROM $orders WHERE `delete_status`='no' ORDER BY id DESC LIMIT 10");
+                                                    <?php
+                                                    $affilaite_id = $sqli->getRow($sqli->getEmail($_SESSION['user_code']), 'affilaite_id');
+                                                    $sql = query_sql("SELECT * FROM $orders WHERE `affilaite_id`='" . $affilaite_id . "' and `delete_status`='no' ORDER BY id DESC LIMIT 10");
                                                     if (mysqli_num_rows($sql) > 0) {
                                                         $c = 0;
                                                         while ($row = mysqli_fetch_assoc($sql)) { ?>
@@ -224,9 +233,9 @@ $title = 'User Dashboard'; ?>
                         var storeName = document.getElementById('storeName').value;
                         var vars = "storeName=" + storeName;
 
-                        if (email == "") {
+                        if (storeName == "") {
                             setTimeout(function() {
-                                alert('Unexpected Error!!! Please try again!');
+                                sweetUnpre('Unexpected Error!!! Please try again!');
                             }, 1500);
                         } else {
                             hr.open("POST", url, true);
@@ -236,8 +245,11 @@ $title = 'User Dashboard'; ?>
                                     if (hr.status == 200) {
                                         var return_data = hr.responseText;
                                         sweetUnpre(return_data);
+                                        setTimeout(function() {
+                                            location.reload();
+                                        }, 1000);
                                     } else {
-                                        alert('An unexpected error occurred. Please try again later.');
+                                        sweetUnpre('An unexpected error occurred. Please try again later.');
                                     }
                                 }
                             }
@@ -267,7 +279,7 @@ $title = 'User Dashboard'; ?>
 
                         if (email == "") {
                             setTimeout(function() {
-                                alert('Unexpected Error!!! Please try again!');
+                                sweetUnpre('Unexpected Error!!! Please try again!');
                             }, 1500);
                         } else {
                             hr.open("POST", url, true);
@@ -278,7 +290,7 @@ $title = 'User Dashboard'; ?>
                                         var return_data = hr.responseText;
                                         sweetUnpre(return_data);
                                     } else {
-                                        alert('An unexpected error occurred. Please try again later.');
+                                        sweetUnpre('An unexpected error occurred. Please try again later.');
                                     }
                                 }
                             }

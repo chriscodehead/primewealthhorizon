@@ -23,7 +23,11 @@
         <img src="assets/images/header.gif" alt="">
       </h5>
       <span>
-        User ID: <span class="text-warning"><?php print $sqli->getRow($sqli->getEmail($_SESSION['user_code']), 'user_code'); ?></span>
+        Affiliate ID: <span class="text-warning"><?php print $sqli->getRow($sqli->getEmail($_SESSION['user_code']), 'affilaite_id'); ?> (<?php if ($sqli->getRow($sqli->getEmail($_SESSION['user_code']), 'approved_for_affiliate') == 'no') {
+                                                                                                                                            print 'Unverified';
+                                                                                                                                          } else {
+                                                                                                                                            print 'Verified';
+                                                                                                                                          } ?>)</span>
       </span>
     </div>
 
@@ -131,7 +135,7 @@
 
         <li class="profile-nav onhover-dropdown pe-0 me-0">
           <div class="media profile-media">
-            <img class="user-profile rounded-circle" src="assets/images/users/4.jpg" alt="">
+            <img class="user-profile rounded-circle" src="../userImg/avatar.png" alt="">
             <div class="user-name-show media-body">
               <span><?php print $sqli->getRow($sqli->getEmail($_SESSION['user_code']), 'fname'); ?></span>
               <p class="mb-0 font-roboto">Account<i class="middle ri-arrow-down-s-line"></i></p>
@@ -164,7 +168,7 @@
             </li>
             <li>
               <a data-bs-toggle="modal" data-bs-target="#staticBackdrop"
-                href="../../end-current-session">
+                href="../end-current-session">
                 <i data-feather="log-out"></i>
                 <span>Log out</span>
               </a>

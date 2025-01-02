@@ -6,6 +6,33 @@ if (!isset($_SESSION)) {
 
 if (isset($_REQUEST['action'])) {
 
+     //saveStoreName
+     if ($_REQUEST['action'] == 'saveStoreName') {
+          $storeName = mysqli_real_escape_string($link, $_REQUEST['storeName']);
+          $UserId = $sqli->getRow($sqli->getEmail($_SESSION['user_code']), 'user_code');
+
+          if (!empty($storeName) && !empty($UserId)) {
+               $feilds = array('affilaite_url');
+               $value = array($storeName);
+               $querry = $cal->update($user_tb, $feilds, $value, 'user_code', $UserId);
+
+               if ($querry == 'Update was successful') {
+
+                    $msg = 'Success! Your store was updated.';
+                    echo  $msg;
+               } else {
+                    $msg =  "An unexpected error occurred. Please try again later";
+                    echo $msg;
+               }
+          } else {
+               $msg =  "An unexpected error has occurred. Please try again later.";
+               echo $msg;
+          }
+     }
+
+
+     /////////////////////////////////////////////////////////
+     ////////////////////////////////////////////
      ///deleteProduct
      if ($_REQUEST['action'] == 'deleteProduct') {
           $productId = mysqli_real_escape_string($link, $_REQUEST['productId']);

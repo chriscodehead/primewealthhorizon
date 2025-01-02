@@ -11,6 +11,7 @@ if (isset($_POST['sub'])) {
 
     $product_name = $_POST['product_name'];
     $product_category = $_POST['product_category'];
+    $product_type = $sqli->getCategoryTable($product_category, 'category_type');
     $product_description = $_POST['editor_content'];
     $product_video = $_POST['product_video'];
     $product_price = $_POST['product_price'];
@@ -51,8 +52,8 @@ if (isset($_POST['sub'])) {
             $upl2 = $bassic->uploadImage($pic_tmp1, $path1);
 
             if (empty($upl)) {
-                $fieldup = array("id", "product_id", "product_slug", "category_id", "product_name", "product_price", "product_old_price", "product_commision", "product_thumbnail", "product_image", "product_description", "product_features", "product_video", "product_status", "date_created");
-                $valueup = array(null, $product_id, $product_slug, $product_category, $product_name, $product_price, $product_old_price, $product_commision, $new_name, $new_name1, $product_description, $product_features, $product_video, $product_status, $bassic->getDate());
+                $fieldup = array("id", "product_id", "product_slug", "category_id", "product_type", "product_name", "product_price", "product_old_price", "product_commision", "product_thumbnail", "product_image", "product_description", "product_features", "product_video", "product_status", "date_created");
+                $valueup = array(null, $product_id, $product_slug, $product_category, $product_type, $product_name, $product_price, $product_old_price, $product_commision, $new_name, $new_name1, $product_description, $product_features, $product_video, $product_status, $bassic->getDate());
                 $update = $cal->insertDataB($product, $fieldup, $valueup);
                 if (!empty($update)) {
                     if ($update == 'Registration was successful. Proceed to login!') {
