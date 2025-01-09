@@ -34,16 +34,13 @@
      </li>
 
      <li class="sidebar-list">
-      <a class="linear-icon-link sidebar-link sidebar-title" href="javascript:void(0)">
-       <i class="ri-shopping-cart-line"></i>
-       <span>Category</span>
+      <a class="sidebar-link sidebar-title" href="javascript:void(0)">
+       <i class="ri-user-3-line"></i>
+       <span>My Account</span>
       </a>
       <ul class="sidebar-submenu">
        <li>
-        <a href="category">Category List</a>
-       </li>
-       <li>
-        <a href="add-new-categorys">Create Category</a>
+        <a href="edit-profile">Account Setting</a>
        </li>
       </ul>
      </li>
@@ -55,40 +52,10 @@
       </a>
       <ul class="sidebar-submenu">
        <li>
-        <a href="products">Prodcts</a>
+        <a href="products">My Prodcts</a>
        </li>
        <li>
         <a href="add-new-product">Add New Products</a>
-       </li>
-      </ul>
-     </li>
-
-     <li class="sidebar-list">
-      <a class="sidebar-link sidebar-title" href="javascript:void(0)">
-       <i class="ri-user-3-line"></i>
-       <span>Users</span>
-      </a>
-      <ul class="sidebar-submenu">
-       <li>
-        <a href="all-users">All users</a>
-       </li>
-       <li>
-        <a href="add-new-user">Add new user</a>
-       </li>
-      </ul>
-     </li>
-
-     <li class="sidebar-list">
-      <a class="sidebar-link sidebar-title" href="javascript:void(0)">
-       <i class="ri-user-3-line"></i>
-       <span>Admin</span>
-      </a>
-      <ul class="sidebar-submenu">
-       <li>
-        <a href="all-admin">All admin</a>
-       </li>
-       <li>
-        <a href="add-new-admin">Add new admin</a>
        </li>
       </ul>
      </li>
@@ -102,127 +69,7 @@
        <li>
         <a href="order-list">Order List</a>
        </li>
-       <li>
-        <a href="order-detail">Order Detail</a>
-       </li>
       </ul>
-     </li>
-
-     <li style="display: none;" class="sidebar-list">
-      <a class="linear-icon-link sidebar-link sidebar-title" href="javascript:void(0)">
-       <i class="ri-list-settings-line"></i>
-       <span>Attributes</span>
-      </a>
-      <ul class="sidebar-submenu">
-       <li>
-        <a href="attributes.html">Attributes</a>
-       </li>
-       <li>
-        <a href="add-new-attribute.html">Add Attributes</a>
-       </li>
-      </ul>
-     </li>
-
-     <li style="display: none;" class="sidebar-list">
-      <a class="sidebar-link sidebar-title link-nav" href="restaurants.html">
-       <i class="ri-shopping-bag-2-line"></i>
-       <span>Restaurants</span>
-      </a>
-     </li>
-
-     <li style="display: none;" class="sidebar-list">
-      <a class="sidebar-link sidebar-title link-nav" href="drivers.html">
-       <i class="ri-car-line"></i>
-       <span>Drivers</span>
-      </a>
-     </li>
-
-     <li style="display: none;" class="sidebar-list">
-      <a class="linear-icon-link sidebar-link sidebar-title" href="javascript:void(0)">
-       <i class="ri-bowl-line"></i>
-       <span>Foods</span>
-      </a>
-      <ul class="sidebar-submenu">
-       <li>
-        <a href="foods.html">Food List</a>
-       </li>
-       <li>
-        <a href="add-new-food.html">Create Food</a>
-       </li>
-      </ul>
-     </li>
-
-     <li style="display: none;" class="sidebar-list">
-      <a class="sidebar-link sidebar-title" href="javascript:void(0)">
-       <i class="ri-user-3-line"></i>
-       <span>Roles</span>
-      </a>
-      <ul class="sidebar-submenu">
-       <li>
-        <a href="role.html">All roles</a>
-       </li>
-       <li>
-        <a href="create-roles.html">Create Role</a>
-       </li>
-      </ul>
-     </li>
-
-     <li style="display: none;" class="sidebar-list">
-      <a class="sidebar-link sidebar-title link-nav" href="media.html">
-       <i class="ri-price-tag-3-line"></i>
-       <span>Media</span>
-      </a>
-     </li>
-
-     <li style="display: none;" class="sidebar-list">
-      <a class="sidebar-link sidebar-title link-nav" href="live-traking.html">
-       <i class="ri-road-map-line"></i>
-       <span>Live Traking</span>
-      </a>
-     </li>
-
-     <li style="display: none;" class="sidebar-list">
-      <a class="linear-icon-link sidebar-link sidebar-title" href="javascript:void(0)">
-       <i class="ri-focus-3-line"></i>
-       <span>Localization</span>
-      </a>
-      <ul class="sidebar-submenu">
-       <li>
-        <a href="translation.html">Translation</a>
-       </li>
-       <li>
-        <a href="currency-rates.html">Currency Rates</a>
-       </li>
-      </ul>
-     </li>
-
-     <li style="display: none;" class="sidebar-list">
-      <a class="linear-icon-link sidebar-link sidebar-title" href="javascript:void(0)">
-       <i class="ri-price-tag-3-line"></i>
-       <span>Coupons</span>
-      </a>
-      <ul class="sidebar-submenu">
-       <li>
-        <a href="coupon-list.html">Coupon List</a>
-       </li>
-       <li>
-        <a href="create-coupon.html">Create Coupon</a>
-       </li>
-      </ul>
-     </li>
-
-     <li style="display: none;" class="sidebar-list">
-      <a class="sidebar-link sidebar-title link-nav" href="taxes.html">
-       <i class="ri-price-tag-3-line"></i>
-       <span>Tax</span>
-      </a>
-     </li>
-
-     <li style="display: none;" class="sidebar-list">
-      <a class="sidebar-link sidebar-title link-nav" href="product-review.html">
-       <i class="ri-star-line"></i>
-       <span>Product Review</span>
-      </a>
      </li>
 
      <li class="sidebar-list">

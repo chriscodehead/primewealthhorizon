@@ -1,7 +1,6 @@
 <?php
 require_once('include.php');
-$title = 'Dashboard | Orders';
-$bassic->checkLogedINAdmin('login'); ?>
+$title = 'Dashboard | Orders'; ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <?php require_once('head.php'); ?>

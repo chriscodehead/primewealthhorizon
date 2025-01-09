@@ -43,7 +43,7 @@ $title = 'User Dashboard'; ?>
 
                 <div class="row">
 
-                  <?php $sql = query_sql("SELECT * FROM $product WHERE `product_type`='starter'  ORDER BY id ASC");
+                  <?php $sql = query_sql("SELECT * FROM $starter_pack_tb ORDER BY id ASC");
                   if (mysqli_num_rows($sql) > 0) {
                     $c = 0;
                     while ($row = mysqli_fetch_assoc($sql)) { ?>
@@ -63,7 +63,7 @@ $title = 'User Dashboard'; ?>
 
                               </ul>
                               <center>
-                                <a href="subscribe-to-package"> <button class="btn btn-warning">Subscribe</button></a>
+                                <a href="subscribe-to-package?pack-id=<?php print $row['product_id']; ?>"> <button class="btn btn-warning">Subscribe</button></a>
                               </center>
 
                             </div>

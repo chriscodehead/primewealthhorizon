@@ -51,6 +51,21 @@
      <li class="sidebar-list">
       <a class="linear-icon-link sidebar-link sidebar-title" href="javascript:void(0)">
        <i class="ri-store-3-line"></i>
+       <span>Starter Pack</span>
+      </a>
+      <ul class="sidebar-submenu">
+       <li>
+        <a href="starter-pack">Starter Packs</a>
+       </li>
+       <li>
+        <a href="add-new-starter-pack">Add New Starter Pack</a>
+       </li>
+      </ul>
+     </li>
+
+     <li class="sidebar-list">
+      <a class="linear-icon-link sidebar-link sidebar-title" href="javascript:void(0)">
+       <i class="ri-store-3-line"></i>
        <span>Product</span>
       </a>
       <ul class="sidebar-submenu">
