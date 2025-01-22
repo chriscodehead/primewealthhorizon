@@ -61,6 +61,80 @@ if (isset($_REQUEST['action'])) {
           }
      }
 
+     //unApproveStarter
+     if ($_REQUEST['action'] == 'unApproveStarter') {
+          $packId = mysqli_real_escape_string($link, $_REQUEST['packId']);
+          $user_email = $cal->selectFrmDB($top_up, 'email', 'payment_id', $packId);
+          $approved_for_affiliate = 'no';
+          $payment_activation_status = 'no';
+          $status = 0;
+
+          if (!empty($packId)) {
+
+               $feilds1 = array('status');
+               $value1 = array($status);
+               $querry1 = $cal->update($top_up, $feilds1, $value1, 'payment_id', $packId);
+
+               $feilds = array('approved_for_affiliate', 'payment_activation_status');
+               $value = array($approved_for_affiliate, $payment_activation_status);
+               $querry = $cal->update($user_tb, $feilds, $value, 'email', $user_email);
+
+               if ($querry == 'Update was successful') {
+
+                    $msg = 'Success! The affiliate status has been updated to pending.';
+                    echo json_encode(array('success' => 'Update was successful!!!', 'msg' => $msg));
+               } else {
+                    $msg =  "An unexpected error occurred. Please try again later";
+                    echo json_encode(array('error' => 'Unexpected Error!!!', 'msg' => $msg));
+               }
+          } else {
+               $msg =  "An unexpected error has occurred. Please try again later.";
+               echo json_encode(array('error' => 'Unexpected Error!!!', 'msg' => $msg));
+          }
+     }
+
+     //approveStarter
+     if ($_REQUEST['action'] == 'approveStarter') {
+          $packId = mysqli_real_escape_string($link, $_REQUEST['packId']);
+          $user_email = $cal->selectFrmDB($top_up, 'email', 'payment_id', $packId);
+          $approved_for_affiliate = 'yes';
+          $payment_activation_status = 'yes';
+          $status = 1;
+
+          if (!empty($packId)) {
+
+               $feilds1 = array('status');
+               $value1 = array($status);
+               $querry1 = $cal->update($top_up, $feilds1, $value1, 'payment_id', $packId);
+
+               $feilds = array('approved_for_affiliate', 'payment_activation_status');
+               $value = array($approved_for_affiliate, $payment_activation_status);
+               $querry = $cal->update($user_tb, $feilds, $value, 'email', $user_email);
+
+               if ($querry == 'Update was successful') {
+
+                    $subjt = 'Affiliate Account Approval!';
+                    $message = '<div style="width: 80%; margin-left: 5%; margin-right: 5%;  box-shadow: 0 16px 24px rgba(51, 51, 51, .08) !important; padding:5%; border: solid #fdfdfd;">
+         <img width="270" src="https://' . $domain . '/img/logo.png" /><br>
+         <div style="height: 20px; background: rgba(116, 105, 105, 0.08); margin-top: 30px; box-shadow: 0 16px 24px rgba(5, 5, 1, .08) !important;"></div><br><br>
+
+         <h4>Success! Your affiliate account has just been approved.</h4>
+         <p>Congratulations! Your affiliate account has been approved successfully. You can now log in to your dashboard, add products, and start promoting.<br><br>
+         Best regards,<br>' . $siteName . '</p></div>';
+                    @$email_call->generalMessage($subjt, $message, $user_email);
+
+                    $msg = 'Success! The affiliate status has been updated to approved.';
+                    echo json_encode(array('success' => 'Update was successful!!!', 'msg' => $msg));
+               } else {
+                    $msg =  "An unexpected error occurred. Please try again later";
+                    echo json_encode(array('error' => 'Unexpected Error!!!', 'msg' => $msg));
+               }
+          } else {
+               $msg =  "An unexpected error has occurred. Please try again later.";
+               echo json_encode(array('error' => 'Unexpected Error!!!', 'msg' => $msg));
+          }
+     }
+
      //setPendingPayment
      if ($_REQUEST['action'] == 'setPendingPayment') {
           $UserId = mysqli_real_escape_string($link, $_REQUEST['UserId']);

@@ -60,6 +60,9 @@
        <li>
         <a href="add-new-starter-pack">Add New Starter Pack</a>
        </li>
+       <li>
+        <a href="starter-pack-transactions">Subscription</a>
+       </li>
       </ul>
      </li>
 

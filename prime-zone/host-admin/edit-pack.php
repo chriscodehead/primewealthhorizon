@@ -22,6 +22,7 @@ if (isset($_POST['sub'])) {
  $product_old_price = $_POST['product_old_price'];
  $product_commision = $_POST['product_commision'];
  $product_status = $_POST['product_status'];
+ $product_quantity = $_POST['product_quantity'];
  $product_features = '';
 
  $pic_name  = $_FILES['product_thumbnail']['name'];
@@ -67,8 +68,8 @@ if (isset($_POST['sub'])) {
     $upl2 = $bassic->uploadImage($pic_tmp1, $path1);
 
     if (empty($upl)) {
-     $fieldup = array("product_slug", "category_id", "product_name", "product_price", "product_old_price", "product_commision", "product_thumbnail", "product_image", "product_description", "product_features", "product_video", "product_status", "last_updated");
-     $valueup = array($product_slug, $product_category, $product_name, $product_price, $product_old_price, $product_commision, $new_name, $new_name1, $product_description, $product_features, $product_video, $product_status, $bassic->getDate());
+     $fieldup = array("product_slug", "category_id", "product_name", "product_price", "product_old_price", "product_commision", "product_thumbnail", "product_image", "product_description", "product_features", "product_video", "product_status", "product_quantity", "last_updated");
+     $valueup = array($product_slug, $product_category, $product_name, $product_price, $product_old_price, $product_commision, $new_name, $new_name1, $product_description, $product_features, $product_video, $product_status, $product_quantity, $bassic->getDate());
      $update = $cal->update($starter_pack_tb, $fieldup, $valueup, 'product_id', $productId);
      if (!empty($update)) {
       $msg = $update;
@@ -82,8 +83,8 @@ if (isset($_POST['sub'])) {
     $msg =  $picvalidation;
    }
   } else {
-   $fieldup = array("product_slug", "category_id", "product_name", "product_price", "product_old_price", "product_commision", "product_description", "product_features", "product_video", "product_status", "last_updated");
-   $valueup = array($product_slug, $product_category, $product_name, $product_price, $product_old_price, $product_commision, $product_description, $product_features, $product_video, $product_status, $bassic->getDate());
+   $fieldup = array("product_slug", "category_id", "product_name", "product_price", "product_old_price", "product_commision", "product_description", "product_features", "product_video", "product_status", "product_quantity", "last_updated");
+   $valueup = array($product_slug, $product_category, $product_name, $product_price, $product_old_price, $product_commision, $product_description, $product_features, $product_video, $product_status, $product_quantity, $bassic->getDate());
    $update = $cal->update($starter_pack_tb, $fieldup, $valueup, 'product_id', $productId);
    if (!empty($update)) {
     $msg = $update;
@@ -163,6 +164,14 @@ $row = mysqli_fetch_assoc($sql);
                  } ?>
 
                 </select>
+               </div>
+              </div>
+
+              <div class="col-xl-6">
+               <div class="input-box">
+                <h6>Pack Quantity</h6>
+                <input name="product_quantity" value="<?php print $row['product_quantity']; ?>" type="number"
+                 placeholder="Pack Quantity">
                </div>
               </div>
 

@@ -10,9 +10,8 @@ $title = 'User Dashboard'; ?>
         <i class="ri-arrow-up-double-fill"></i>
     </div>
 
-    <!-- <div class="loader-wrapper">
-        <img src="assets/images/loader.gif" alt="">
-    </div> -->
+    <?php require_once('loader.php');
+    ?>
 
     <div class="page-wrapper compact-wrapper" id="pageWrapper">
 
@@ -29,35 +28,6 @@ $title = 'User Dashboard'; ?>
                             <div class="row">
 
                                 <?php require_once('email-activation-check.php'); ?>
-
-                                <?php if ($sqli->getRow($sqli->getEmail($_SESSION['user_code']), 'approved_for_affiliate') == 'no') { ?>
-                                    <div class="col-xxl-12 col-sm-12 ">
-                                        <div class="card widgets-card">
-                                            <div class="card-body">
-                                                <div class="">
-                                                    To become an affiliate, simply purchase one of our Affiliate Starter Packs to unlock eligibility to join our dynamic team. Once verified, you'll be ready to start earning like a pro, joining countless others who are already turning their efforts into real income. Take the first step toward financial success today!
-                                                    <a href="buy-affiliate-pack">
-                                                        <button class="btn btn-sm btn-danger pull-right" type="button">Become An Affiliate</button>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                <?php } ?>
-
-                                <div class="col-xxl-12 col-sm-12 ">
-                                    <div class="card widgets-card">
-                                        <div class="card-body">
-                                            <div class="">
-                                                <h5>Affiliate Store Link:</h5>
-                                                <?php print $siteUrl; ?><input style="width: 200px;" type="text" value="<?php print $sqli->getRow($sqli->getEmail($_SESSION['user_code']), 'affilaite_url'); ?>" id="storeName" name="storeName" placeholder="Enter store name" oninput="formatInput()"> <i onclick="saveStoreName();" id="updateStoreUrl" class="fa fa-edit text-warning">Save</i>
-                                            </div>
-                                            <a style="font-size: 10px;" target="_blank" href="<?php print $siteUrl; ?><?php print $sqli->getRow($sqli->getEmail($_SESSION['user_code']), 'affilaite_url'); ?>"><?php print $siteUrl; ?><?php print $sqli->getRow($sqli->getEmail($_SESSION['user_code']), 'affilaite_url'); ?></a>
-                                        </div>
-                                    </div>
-                                </div>
-
-
 
                                 <div class="col-xxl-4 col-sm-6 ">
                                     <div class="card widgets-card">
@@ -117,6 +87,33 @@ $title = 'User Dashboard'; ?>
                                     </div>
                                 </div>
 
+                                <?php if ($sqli->getRow($sqli->getEmail($_SESSION['user_code']), 'approved_for_affiliate') == 'no') { ?>
+                                    <div class="col-xxl-12 col-sm-12 ">
+                                        <div class="card widgets-card">
+                                            <div class="card-body">
+                                                <div class="">
+                                                    To become an affiliate, simply purchase one of our Affiliate Starter Packs to unlock eligibility to join our dynamic team. Once verified, you'll be ready to start earning like a pro, joining countless others who are already turning their efforts into real income. Take the first step toward financial success today!
+                                                    <a href="buy-affiliate-pack">
+                                                        <button class="btn btn-sm btn-danger pull-right" type="button">Become An Affiliate</button>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php } ?>
+
+                                <div class="col-xxl-12 col-sm-12 ">
+                                    <div class="card widgets-card">
+                                        <div class="card-body">
+                                            <div class="">
+                                                <h5>Affiliate Store Link:</h5>
+                                                <?php print $siteUrl; ?><input style="width: 200px;" type="text" value="<?php print $sqli->getRow($sqli->getEmail($_SESSION['user_code']), 'affilaite_url'); ?>" id="storeName" name="storeName" placeholder="Enter store name" oninput="formatInput()"> <i onclick="saveStoreName();" id="updateStoreUrl" class="fa fa-edit text-warning">Save</i>
+                                            </div>
+                                            <a style="font-size: 10px;" target="_blank" href="<?php print $siteUrl; ?><?php print $sqli->getRow($sqli->getEmail($_SESSION['user_code']), 'affilaite_url'); ?>"><?php print $siteUrl; ?><?php print $sqli->getRow($sqli->getEmail($_SESSION['user_code']), 'affilaite_url'); ?></a>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
 
@@ -135,6 +132,7 @@ $title = 'User Dashboard'; ?>
                                                         <th>Order Image</th>
                                                         <th>Order Id</th>
                                                         <th>User</th>
+                                                        <th></th>
                                                         <th>Quantity</th>
                                                         <th>Amount</th>
                                                         <th>Payment Method</th>
@@ -165,6 +163,8 @@ $title = 'User Dashboard'; ?>
                                                                 <td><?php print $row['order_id']; ?></td>
 
                                                                 <td><?php print @$sqli->getUserTable($row['user_id'], 'email'); ?></td>
+
+                                                                <td><?php $row['order_qauntity']; ?></td>
 
                                                                 <td><?php print $row['order_qauntity']; ?></td>
 

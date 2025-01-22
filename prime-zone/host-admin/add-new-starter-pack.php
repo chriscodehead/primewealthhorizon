@@ -18,6 +18,7 @@ if (isset($_POST['sub'])) {
  $product_old_price = $_POST['product_old_price'];
  $product_commision = $_POST['product_commision'];
  $product_status = $_POST['product_status'];
+ $product_quantity = $_POST['product_quantity'];
  $product_features = '';
 
  $pic_name  = $_FILES['product_thumbnail']['name'];
@@ -52,8 +53,8 @@ if (isset($_POST['sub'])) {
    $upl2 = $bassic->uploadImage($pic_tmp1, $path1);
 
    if (empty($upl)) {
-    $fieldup = array("id", "product_id", "product_slug", "category_id", "product_type", "product_name", "product_price", "product_old_price", "product_commision", "product_thumbnail", "product_image", "product_description", "product_features", "product_video", "product_status", "date_created");
-    $valueup = array(null, $product_id, $product_slug, $product_category, $product_type, $product_name, $product_price, $product_old_price, $product_commision, $new_name, $new_name1, $product_description, $product_features, $product_video, $product_status, $bassic->getDate());
+    $fieldup = array("id", "product_id", "product_slug", "category_id", "product_type", "product_name", "product_price", "product_old_price", "product_commision", "product_thumbnail", "product_image", "product_description", "product_features", "product_video", "product_status", "product_quantity", "date_created");
+    $valueup = array(null, $product_id, $product_slug, $product_category, $product_type, $product_name, $product_price, $product_old_price, $product_commision, $new_name, $new_name1, $product_description, $product_features, $product_video, $product_status, $product_quantity, $bassic->getDate());
     $update = $cal->insertDataB($starter_pack_tb, $fieldup, $valueup);
     if (!empty($update)) {
      if ($update == 'Registration was successful. Proceed to login!') {
@@ -138,6 +139,14 @@ if (isset($_POST['sub'])) {
                  } ?>
 
                 </select>
+               </div>
+              </div>
+
+              <div class="col-xl-6">
+               <div class="input-box">
+                <h6>Pack Quantity</h6>
+                <input name="product_quantity" value="" type="number"
+                 placeholder="Pack Quantity">
                </div>
               </div>
 

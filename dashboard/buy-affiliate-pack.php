@@ -43,7 +43,7 @@ $title = 'User Dashboard'; ?>
 
                 <div class="row">
 
-                  <?php $sql = query_sql("SELECT * FROM $starter_pack_tb ORDER BY id ASC");
+                  <?php $sql = query_sql("SELECT * FROM $starter_pack_tb WHERE `product_status`=1 ORDER BY id ASC");
                   if (mysqli_num_rows($sql) > 0) {
                     $c = 0;
                     while ($row = mysqli_fetch_assoc($sql)) { ?>

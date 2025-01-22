@@ -68,6 +68,7 @@ $category_tb = 'category_tb';
 $product = 'product';
 $orders = 'orders';
 $starter_pack_tb = 'starter_pack_tb';
+$payment_method = 'payment_method';
 
 class Cal extends DBConnection
 {
@@ -110,6 +111,7 @@ class Cal extends DBConnection
     protected $product = 'product';
     protected $orders = 'orders';
     protected $starter_pack_tb = 'starter_pack_tb';
+    protected $payment_method = 'payment_method';
 
     private static function generateQuestionMark($arr)
     {

@@ -73,6 +73,13 @@
      </li>
 
      <li class="sidebar-list">
+      <a class="sidebar-link sidebar-title link-nav" href="transactions">
+       <i class="ri-archive-line"></i>
+       <span>Transactions</span>
+      </a>
+     </li>
+
+     <li class="sidebar-list">
       <a class="sidebar-link sidebar-title link-nav" href="support-ticket">
        <i class="ri-phone-line"></i>
        <span>Support Ticket</span>

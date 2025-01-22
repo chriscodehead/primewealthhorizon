@@ -24,7 +24,7 @@
       </h5>
       <span>
         Affiliate ID: <span class="text-warning"><?php print $sqli->getRow($sqli->getEmail($_SESSION['user_code']), 'affilaite_id'); ?> (<?php if ($sqli->getRow($sqli->getEmail($_SESSION['user_code']), 'approved_for_affiliate') == 'no') {
-                                                                                                                                            print 'Unverified';
+                                                                                                                                            print '<a href="buy-affiliate-pack">Unverified</a>';
                                                                                                                                           } else {
                                                                                                                                             print 'Verified';
                                                                                                                                           } ?>)</span>
@@ -142,18 +142,7 @@
             </div>
           </div>
           <ul class="profile-dropdown onhover-show-div">
-            <li>
-              <a href="all-users">
-                <i data-feather="users"></i>
-                <span>Users</span>
-              </a>
-            </li>
-            <li>
-              <a href="order-list">
-                <i data-feather="archive"></i>
-                <span>Orders</span>
-              </a>
-            </li>
+
             <li>
               <a href="support-ticket">
                 <i data-feather="phone"></i>

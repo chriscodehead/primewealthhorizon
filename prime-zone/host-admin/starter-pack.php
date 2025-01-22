@@ -48,7 +48,7 @@ $bassic->checkLogedINAdmin('login'); ?>
               <th>Pack Name</th>
               <th>Category</th>
               <th>Price</th>
-              <th>Price Compare</th>
+              <th>Quantity</th>
               <th style="display: none;">Affiliate Commision</th>
               <th>Status</th>
               <th>Option</th>
@@ -56,7 +56,7 @@ $bassic->checkLogedINAdmin('login'); ?>
             </thead>
 
             <tbody>
-             <?php $sql = query_sql("SELECT * FROM $starter_pack_tb  ORDER BY id DESC");
+             <?php $sql = query_sql("SELECT * FROM $starter_pack_tb  ORDER BY id ASC");
              if (mysqli_num_rows($sql) > 0) {
               $c = 0;
               while ($row = mysqli_fetch_assoc($sql)) { ?>
@@ -76,7 +76,7 @@ $bassic->checkLogedINAdmin('login'); ?>
                 <td class="f-w-500"><?php print $base_currency; ?><?php print $row['product_price']; ?></td>
 
                 <td class="td-price">
-                 <strike><?php print $base_currency; ?><?php print $row['product_old_price']; ?></strike>
+                 <?php print $row['product_quantity']; ?>
                 </td>
 
                 <td style="display: none;" class="td-price">

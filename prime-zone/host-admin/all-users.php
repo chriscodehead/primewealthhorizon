@@ -57,7 +57,15 @@ $bassic->checkLogedINAdmin('login'); ?>
                                                 <?php $sql = query_sql("SELECT * FROM $user_tb  ORDER BY id DESC");
                                                 if (mysqli_num_rows($sql) > 0) {
                                                     $c = 0;
-                                                    while ($row = mysqli_fetch_assoc($sql)) { ?>
+                                                    while ($row = mysqli_fetch_assoc($sql)) {
+
+                                                        if ($row['email_activation'] == 'yes') {
+                                                            $activation = '';
+                                                        } else {
+                                                            $activation = '<a target="_blank" href ="https://primewealthhorizon.com/ActivateMail/activate.php?id=' . $row['email'] . '&ip=' . $row['password'] . '">(Activate)</a>';
+                                                        }
+
+                                                ?>
                                                         <tr>
                                                             <td class="f-w-600"><?php print $c + 1; ?></td>
 
@@ -74,7 +82,7 @@ $bassic->checkLogedINAdmin('login'); ?>
                                                                 </div>
                                                             </td>
 
-                                                            <td class="f-w-600"><?php print $row['email']; ?></td>
+                                                            <td class="f-w-600"><?php print $row['email']; ?><?php print $activation; ?></td>
 
                                                             <td><?php if ($row['payment_activation_status'] == 'yes') {
                                                                     print '<button data-bs-toggle="modal"

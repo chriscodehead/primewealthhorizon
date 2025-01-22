@@ -3,7 +3,7 @@ require_once('include.php');
 $title = 'Dashboard | Add Product'; ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-<?php require_once('head.php');
+<?php
 $msg = '';
 
 if (isset($_POST['sub'])) {
@@ -72,7 +72,25 @@ if (isset($_POST['sub'])) {
         $msg = 'Please fill all fields';
     }
 }
+
+require_once('head.php');
 ?>
+<style>
+    .carda {
+        width: 100%;
+        height: 400px;
+        box-shadow: 0px 0px 12px 0px #ccc;
+        border-radius: 5px;
+        overflow: hidden;
+    }
+
+    .carda img {
+        width: 100%;
+        height: 100%;
+        border-radius: 5px;
+        object-fit: cover;
+    }
+</style>
 
 <body>
 
@@ -80,9 +98,8 @@ if (isset($_POST['sub'])) {
         <i class="ri-arrow-up-double-fill"></i>
     </div>
 
-    <div class="loader-wrapper">
-        <img src="assets/images/loader.gif" alt="">
-    </div>
+    <?php require_once('loader.php');
+    ?>
 
     <div class="page-wrapper compact-wrapper" id="pageWrapper">
         <?php require_once('header.php'); ?>
@@ -100,7 +117,7 @@ if (isset($_POST['sub'])) {
                                     <div class="col-12">
                                         <div class="card">
                                             <div class="card-header">
-                                                <h5>Product Information</h5>
+                                                <h5>Product List</h5>
                                             </div>
                                             <?php if (!empty($msg)) { ?>
                                                 <div id="go" class=" col-lg-12">
@@ -108,193 +125,43 @@ if (isset($_POST['sub'])) {
                                                 </div>
                                             <?php } ?>
                                             <div class="card-body">
-                                                <div class="input-items">
+                                                <div class="row">
 
-                                                    <div class="row gy-3">
-
-                                                        <div class="col-xl-6">
-                                                            <div class="input-box">
-                                                                <h6>Product Name</h6>
-                                                                <input name="product_name" type="text"
-                                                                    placeholder="Product Name">
+                                                    <?php
+                                                    $sql = query_sql("SELECT * FROM $product WHERE `product_status`=1 ORDER BY id DESC");
+                                                    if (mysqli_num_rows($sql) > 0) {
+                                                        $c = 0;
+                                                        while ($row = mysqli_fetch_assoc($sql)) { ?>
+                                                            <div class="col-md-4 col-sm-6 mb-4">
+                                                                <div class="card carda">
+                                                                    <img src="../photo/<?php echo $row['product_thumbnail']; ?>" class="card-img-top" alt="<?php echo htmlspecialchars($row['product_name']); ?>" style="height: 200px; object-fit: cover;">
+                                                                    <div class="card-body">
+                                                                        <h3 class="card-title pt-3"><?php echo htmlspecialchars($row['product_name']); ?></h3>
+                                                                        <p class="card-text"><?php echo substr(strip_tags($row['product_description']), 0, 27) . '...'; ?></p>
+                                                                        <p class="card-text">
+                                                                            <strong>Price:</strong> <?php print $base_currency; ?><?php echo number_format($row['product_price']); ?>
+                                                                            <?php if (!empty($row['product_old_price'])) { ?>
+                                                                                <small class="text-muted"><del><?php print $base_currency; ?><?php echo number_format($row['product_old_price']); ?></del></small>
+                                                                            <?php } ?>
+                                                                        </p>
+                                                                        <a href="product-details.php?id=<?php echo $row['id']; ?>" class="btn btn-primary">View Details</a>
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                        </div>
-
-                                                        <div class="col-xl-6">
-                                                            <div class="input-box">
-                                                                <h6>Category</h6>
-                                                                <select class="js-example-basic-single w-100" name="product_category">
-                                                                    <option selected disabled value="">Select Category</option>
-
-                                                                    <?php
-                                                                    $sql = query_sql("SELECT * FROM $category_tb ORDER BY id DESC");
-                                                                    $i = 1;
-                                                                    if (mysqli_num_rows($sql) > 0) {
-                                                                        while ($row = mysqli_fetch_assoc($sql)) { ?>
-                                                                            <option value="<?php print $row['category_id']; ?>"><?php print $row['category_name']; ?></option>
-                                                                    <?php }
-                                                                    } ?>
-
-                                                                </select>
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-12">
-                                        <div class="card">
-                                            <div class="card-header">
-                                                <h5>Description</h5>
-                                            </div>
-                                            <div class="card-body">
-                                                <div class="input-items">
-                                                    <div class="row gy-3">
+                                                        <?php $c++;
+                                                        }
+                                                    } else { ?>
                                                         <div class="col-12">
-                                                            <div class="input-box">
-                                                                <textarea name="editor_content" id="editor"></textarea>
-                                                                <script>
-                                                                    CKEDITOR.replace('editor');
-                                                                </script>
-                                                            </div>
+                                                            <p class="text-center">No products available.</p>
                                                         </div>
-                                                    </div>
+                                                    <?php } ?>
+
                                                 </div>
+
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div class="col-12">
-                                        <div class="card">
-                                            <div class="card-header">
-                                                <h5>Product Images</h5>
-                                            </div>
-                                            <div class="card-body">
-                                                <div class="input-items">
-                                                    <div class="row gy-3">
-                                                        <div class="col-xl-6">
-                                                            <div class="input-box">
-                                                                <h6>Images</h6>
-                                                                <input name="product_image" type="file"
-                                                                    id="formFile" multiple>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-xl-6">
-                                                            <div class="input-box">
-                                                                <h6>Thumbnail Image</h6>
-                                                                <input name="product_thumbnail" type="file"
-                                                                    id="formFile1" multiple>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-12">
-                                        <div class="card">
-                                            <div class="card-header">
-                                                <h5>Product Videos</h5>
-                                            </div>
-                                            <div class="card-body">
-                                                <div class="input-items">
-                                                    <div class="row gy-3">
-                                                        <div class="col-xl-6">
-                                                            <div class="input-box">
-                                                                <h6>Video Provider</h6>
-                                                                <select class="js-example-basic-single w-100" name="state">
-                                                                    <option>Youtube</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-xl-6">
-                                                            <div class="input-box">
-                                                                <h6>Video Link</h6>
-                                                                <input name="product_video" type="text"
-                                                                    placeholder="Video Link">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-12">
-                                        <div class="card">
-                                            <div class="card-header">
-                                                <h5>Product Price</h5>
-                                            </div>
-                                            <div class="card-body">
-                                                <div class="input-items">
-                                                    <div class="row gy-3">
-                                                        <div class="col-xl-4">
-                                                            <div class="input-box">
-                                                                <h6>price(<?php print $base_currency; ?>)</h6>
-                                                                <input name="product_price" type="number" placeholder="0">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-xl-4">
-                                                            <div class="input-box">
-                                                                <h6>Compare at price(<?php print $base_currency; ?>)</h6>
-                                                                <input name="product_old_price" type="number" placeholder="0">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-xl-4">
-                                                            <div class="input-box">
-                                                                <h6>Affiliate Commision(%)</h6>
-                                                                <input name="product_commision" type="number" placeholder="0">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-12">
-                                        <div class="card">
-                                            <div class="card-header">
-                                                <h5>Product Inventory</h5>
-                                            </div>
-                                            <div class="card-body">
-                                                <div class="input-items">
-                                                    <div class="row gy-3">
-
-                                                        <div class="col-xl-12">
-                                                            <div class="input-box">
-                                                                <h6>Stock Status</h6>
-                                                                <select class="js-example-basic-single w-100" name="product_status">
-                                                                    <option value="1">In Stock</option>
-                                                                    <option value="0">Out Of Stock</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div style="padding-bottom: 100px;" class="col-12">
-                                        <div class="">
-                                            <div class="">
-                                                <div class="input-items">
-                                                    <div class="row gy-3">
-
-                                                        <div class="col-12">
-                                                            <button name="sub" class="btn restaurant-button">Save</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
 
                                 </div>
                             </form>
